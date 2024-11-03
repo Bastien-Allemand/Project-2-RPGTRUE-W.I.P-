@@ -1,15 +1,18 @@
 #include "Utility.h"
 #include "Color.h"
+#include "Fighter.h"
+#include "GameManager.h"
+#include "Mage.h"
+#include "Thief.h"
+#include "Tils.h"
 #include <iostream>
 #include <windows.h>;
 #include <conio.h>;
 #include <string>;
 using namespace std;
 
-
 char movement()
 {
-
 	char moved = _getch();
 	return moved;
 }
@@ -110,4 +113,103 @@ int GetConsoleLength()
 	return csbi.srWindow.Right - csbi.srWindow.Left + 1; // Largeur
 }
 
+void Cmoved(tils* allof, char cMove, int* x, int* y)
+{
+	allof[*x].all[*y]->Character = false;
+	switch (cMove)
+	{
+	case('z'):
 
+		if (*x != 0)
+		{
+			*x += -1;
+		}
+		allof[*x].all[*y]->Character = true;
+		break;
+	case('q'):
+		if (*y != 0)
+		{
+			*y += -1;
+		}
+		allof[*x].all[*y]->Character = true;
+		break;
+	case('s'):
+		if (*x != 31)
+		{
+			*x += 1;
+		}
+		allof[*x].all[*y]->Character = true;
+		break;
+	case('d'):
+		if (*y != 31)
+		{
+			*y += 1;
+		}
+		allof[*x].all[*y]->Character = true;
+		break;
+	default:
+		break;
+	}
+}
+
+void CharacterCreation(int Class)
+{
+	CharacterStat* Player[1];
+	switch (Class)
+	{
+	case(0):
+		Player[0] = new Fighter(20, 4, 2);  //PV ATTACK DEFENSE
+		cout << "Fighter Created" << endl;
+		break;
+	case(1):
+		Player[0] = new Mage(10, 20, 4, 0); //MANA PV ATTACK DEFENSE
+		cout << "Mage Created" << endl;
+		break;
+	case(2):
+		Player[0] = new Thief(8, 20, 3, 1);
+		cout << "Assasin created" << endl;
+		break;
+	default:
+		break;
+	}
+	Player[0]->ShowStat();
+
+}
+
+void makingofmap(tils* allof, GameManager* GameS)
+{
+
+	for (int x = 0; x < 32; x++)
+	{
+		for (int y = 0; y < 32; y++)
+		{
+			allof[x].all[y]->enemis = false;
+			allof[x].all[y]->Character = false;
+
+			if (x == 31 && y == 16)
+			{
+				allof[x].all[y]->Character = true;
+			}
+			if (x == 10 && y == 10)
+			{
+				allof[x].all[y]->enemis = true;
+				allof[x].all[y]->Mob = &GameS->Mob[0];
+			}
+			if (x == 20 && y == 10)
+			{
+				allof[x].all[y]->enemis = true;
+				allof[x].all[y]->Mob = &GameS->Mob[1];
+			}
+			if (x == 10 && y == 20)
+			{
+				allof[x].all[y]->enemis = true;
+				allof[x].all[y]->Mob = &GameS->Mob[2];
+			}
+			if (x == 20 && y == 20)
+			{
+				allof[x].all[y]->enemis = true;
+				allof[x].all[y]->Mob = &GameS->Mob[3];
+			}
+		}
+	}
+}

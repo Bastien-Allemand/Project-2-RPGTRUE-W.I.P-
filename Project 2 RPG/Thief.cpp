@@ -6,12 +6,12 @@ using namespace std;
 void Thief::ShowStat()
 {
 	CharacterStat::ShowStat();
-	cout << "Mana :" << mana << endl;
+	cout << "Mana :" << Mana << endl;
 	cout << "Crit Rate :" << critRate << "%" << endl;
 }
 
 void Thief::levelup()
 {
-	mana = (mana * 4) / 100;
+	Mana = (Mana * 4) / 100;
 	CharacterStat::levelup();
 }

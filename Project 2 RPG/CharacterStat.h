@@ -28,4 +28,6 @@ public:
     void takedmg(int DMG);
 
     virtual void levelup();
+
+    static int FightSequence();
 };

@@ -1,83 +1,50 @@
 #include "Utility.h"
+#include "Tils.h"
 #include "Menus.h"
-#include "Color.h"
-#include "Fighter.h"
-#include "Mage.h"
-#include "Thief.h"
-#include "CharacterStat.h"
 #include <conio.h>
 #include <windows.h>
 #include <iostream>
 
-
 using namespace std;
 
-const char* id(int y)
-{
-	int f = y % 2;
-	if (f == 0)
-	{
-		return BORANGE;
-	}
-	else
-	{
-		return BBROWN;
-	}
-}
-
-void makingofmap()
+void PlayGame(tils* allof,GameManager* GameS)
 {
 
-}
-void FRAME()
-{
-	int size = 32;
-	system("CLS");
-	for (int i = 0; i < size; i++)
+	makingofmap(allof,GameS);
+	int x = 31;
+	int y = 16;
+	CharacterCreation(CharaCreationMenu());
+
+	FRAME(allof);
+	
+	while (true)
 	{
-		for (int y = 0; y < size + size; y++)
-		{
-			cout << id(y) << " @";
-		}
-		cout << BDEFAULT << endl;
-		for (int y = 0; y < size + size; y++)
-		{
-			cout << id(y - 1) << "  ";
-		}
-		cout << BDEFAULT << endl;
+		char cMove = movement();
+		Cmoved(allof, cMove, &x, &y);
+		FRAME(allof);
 	}
-}
-void CharacterCreation(int Class)
-{
-	CharacterStat* Player[1];
-	switch (Class)
-	{
-	case(0):
-		Player[0] = new Fighter(20, 4, 2);  //PV ATTACK DEFENSE
-		cout << "Fighter Created" << endl;
-		break;
-	case(1):
-		Player[0] = new Mage(10, 20, 4, 0); //MANA PV ATTACK DEFENSE
-		cout << "Mage Created" << endl;
 
-		break;
-	case(2):
-		Player[0] = new Thief(8, 20, 3, 1);
-		cout << "Assasin created" << endl;
-		break;
-	default:
-		break;
-	}
-	Player[0]->ShowStat();
 
 }
-
 
 int main()
 {
+	GameManager Games;
+	tils* allof = new tils[32];
+
+	for (int i = 0; i < 32; i++)
+	{
+		allof[i].all = new tilsId * [32];
+		for (int j = 0; j < 32; j++)
+		{
+			allof[i].all[j] = (tilsId*)malloc (sizeof(tilsId));
+		}
+	}
 	bool t = true;
 	FullScreen();
-	while (t == true)
+
+
+ 	while (t == true)
 	{
 
 
@@ -86,10 +53,8 @@ int main()
 		switch (Y)
 		{
 		case(0):
-
-			CharacterCreation(CharaCreationMenu());
 			t = false;
-			FRAME();
+			PlayGame(allof,&Games);
 			break;
 		case(1):
 			ClearFullScreen();

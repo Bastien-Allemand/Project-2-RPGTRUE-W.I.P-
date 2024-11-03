@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "CharacterStat.h"
 using namespace std;
 class Mage :public CharacterStat

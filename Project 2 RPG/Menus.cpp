@@ -1,6 +1,8 @@
 #include "Menus.h"
 #include "Color.h"
 #include "Utility.h"
+#include "CharacterStat.h"
+#include "Tils.h"
 #include <iostream>
 using namespace std;
 
@@ -273,3 +275,130 @@ int OptionMenu()
 		}
 	}
 }
+
+int Fightmenu()
+{
+
+	int RU = 0;
+	const char* first = GREEN;
+	const char* second = DEFAULT;
+	const char* third = DEFAULT;
+	const char* fourth = DEFAULT;
+	while (true)
+	{
+		
+		HideCursor();
+		MoveCursor(10,0);
+
+		cout << "(Q,D,Space to Validate)" << endl;
+		cout << "Menu:" << endl;
+		cout << first << "+---------+" << second << "---------+" << third << "--------+ " << DEFAULT << endl;
+		cout << first << "|  Fight  |" << second << "Item(WIP)|" << third << "Nothing |" << DEFAULT << endl;
+		cout << first << "+---------+" << second << "---------+" << third << "--------+" << DEFAULT << endl;
+
+		int move = movement();
+		switch (move)
+		{
+		case(' '):
+			return RU;
+		case('q'):
+			if (third == GREEN)
+			{
+				first = DEFAULT;
+
+				second = GREEN;
+
+				third = DEFAULT;
+				RU = 1;
+			}
+			else if (second == GREEN)
+			{
+				first = GREEN;
+
+				second = DEFAULT;
+
+				third = DEFAULT;
+
+				RU = 0;
+			}
+			else
+			{
+				first = DEFAULT;
+
+				second = DEFAULT;
+
+				third = GREEN;
+				RU = 2;
+			}
+			break;
+
+		case('d'):
+			if (first == GREEN)
+			{
+				first = DEFAULT;
+
+				second = GREEN;
+
+				third = DEFAULT;
+				RU = 1;
+			}
+			else if (second == GREEN)
+			{
+				first = DEFAULT;
+
+				second = DEFAULT;
+
+				third = GREEN;
+				RU = 2;
+			}
+			else
+			{
+				first = GREEN;
+
+				second = DEFAULT;
+
+				third = DEFAULT;
+				RU = 0;
+			}
+			break;
+
+		default:
+			continue;
+		}
+	}
+}
+
+const char* id(tils* allof, int y, int x)
+{
+	if (allof[x].all[y]->Character == true && allof[x].all[y]->enemis == true)
+	{
+		CharacterStat::FightSequence();
+	}
+	else if (allof[x].all[y]->enemis == true)
+	{
+		return BRED;
+	}
+	else if (allof[x].all[y]->Character == true)
+	{
+		return BBLUE;
+	}
+	else
+	{
+		return BBROWN;
+	}
+}
+
+void FRAME(tils* allof)
+{
+	int size = 32;
+	MoveCursor(0, 0);
+	for (int i = 0; i < size; i++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			cout << id(allof, y, i) << "  ";
+		}
+		cout << BDEFAULT << endl;
+	}
+}
+

@@ -130,6 +130,7 @@
     <ClCompile Include="CharacterStat.cpp" />
     <ClCompile Include="EnemisClass.cpp" />
     <ClCompile Include="Fighter.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Project 2 RPG.cpp" />
@@ -141,9 +142,12 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="EnemisClass.h" />
     <ClInclude Include="Fighter.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Mage.h" />
     <ClInclude Include="Menus.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="Thief.h" />
+    <ClInclude Include="Tils.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

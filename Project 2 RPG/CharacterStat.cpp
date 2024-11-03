@@ -46,3 +46,9 @@ void CharacterStat::levelup()
 
     healthpoints = healthmax;
 }
+
+int CharacterStat::FightSequence()
+{
+    return 0;
+}
+

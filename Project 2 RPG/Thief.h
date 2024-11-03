@@ -1,14 +1,14 @@
 #pragma once
 #include "CharacterStat.h"
-using namespace std;
+
 class Thief : public CharacterStat
 {
 	int critRate;
-	int mana;
+	int Mana;
 public:
 	Thief(int Gmana, int HealthMax, int attack, int defense) : CharacterStat(HealthMax, attack, defense)
 	{
-		mana = Gmana;
+		Mana = Gmana;
 		critRate = 25;
 
 	}
