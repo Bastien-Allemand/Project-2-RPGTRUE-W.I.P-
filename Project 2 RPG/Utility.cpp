@@ -9,13 +9,36 @@
 #include <iostream>
 #include <windows.h>;
 #include <conio.h>;
-#include <string>;
+
 using namespace std;
 
 char movement()
 {
 	char moved = _getch();
 	return moved;
+}
+
+bool GraphicKey(int* i)
+{
+	int move = movement();
+	switch (move)
+	{
+	case(' '):
+	{
+		return true;
+	}
+	case('q'):
+		*i -= 1;
+		if (*i < 0)
+			*i = 2;
+		return false;
+	case('d'):
+		*i += 1;
+		*i = *i % 3;
+		return false;
+	default:
+		break;
+	}
 }
 
 int rgbToAnsi(int r, int g, int b)
@@ -26,7 +49,8 @@ int rgbToAnsi(int r, int g, int b)
 	b = max(0, min(255, b));
 
 	// Convert RGB to ANSI 256 color mode
-	// pour correctement formuler penser a rajoute un nouveau define j'appele oss = #define oss "\033[38;5;" puis mettre la fonction et finir avec m tres important
+	// pour correctement formuler penser a rajoute un nouveau define j'appele oss = #define oss "\033[38;5;" 
+	// puis mettre la fonction et finir avec m tres important
 	// Formula: 16 + 36 * R + 6 * G + B
 	int ansiCode = 16 + (36 * (r / 51)) + (6 * (g / 51)) + (b / 51);
 	return ansiCode;
@@ -192,7 +216,7 @@ void makingofmap(tiles* allof, GameManager* GameS)
 	}
 }
 
-bool CheckEnemis(int *x,int *y,tiles* allof)
+bool CheckEnemis(int *x,int *y,tiles* allof,int *Ex,int *Ey)
 {	
 	bool T = false;
 	if (*x != 0)
@@ -200,57 +224,74 @@ bool CheckEnemis(int *x,int *y,tiles* allof)
 		if (allof[*x - 1].all[*y]->enemis == true)
 		{
 			T = true;
+			*Ex = *x - 1;
+			*Ey = *y;
 		}
 	}
-	else if (*x != 31)
+	if (*x != 31)
 	{
 		if (allof[*x + 1].all[*y]->enemis == true)
 		{
 			T = true;
+			*Ex = *x + 1;
+			*Ey = *y;
 		}
 	}
-	else if (*y != 0)
+	if (*y != 0)
 	{
 		if (allof[*x].all[*y - 1]->enemis == true)
 		{
 			T = true;
+			*Ex = *x;
+			*Ey = *y-1;
 		}
 	}
-	else if (*y != 31)
+	if (*y != 31)
 	{
 		if (allof[*x].all[*y + 1]->enemis == true)
 		{
 			T = true;
+			*Ex = *x;
+			*Ey = *y+1;
 		}
 	}
-	else if (*x != 0 && *y != 0)
+	if (*x != 0 && *y != 0)
 	{
 		if (allof[*x - 1].all[*y - 1]->enemis == true)
 		{
 			T = true;
+			*Ex = *x - 1;
+			*Ey = *y-1;
 		}
 	}
-	else if (*x != 0 && *y != 31)
+	if (*x != 0 && *y != 31)
 	{
 		if (allof[*x - 1].all[*y + 1]->enemis == true)
 		{
 			T = true;
+			*Ex = *x - 1;
+			*Ey = *y+1;
 		}
 	}
-	else if (*x != 31 && *y != 31)
+	if (*x != 31 && *y != 31)
 	{
 		if (allof[*x + 1].all[*y + 1]->enemis == true)
 		{
 			T = true;
+			*Ex = *x + 1;
+			*Ey = *y+1;
 		}
 	}
-	else if (*x != 31 && *y != 0)
+	if (*x != 31 && *y != 0)
 	{
 		if (allof[*x + 1].all[*y - 1]->enemis == true)
 		{
 			T = true;
+			*Ex = *x + 1;
+			*Ey = *y-1;
 		}
 	}
+
 	return T;
 }
 

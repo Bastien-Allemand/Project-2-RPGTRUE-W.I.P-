@@ -7,90 +7,53 @@
 #include <iostream>
 using namespace std;
 
-int Menusofopening()
+int StartMenu()
 {
-	int Run = 0;
-	const char* first = GREEN;
-	const char* second = DEFAULT;
-	const char* third = DEFAULT;
+	int i = 0;
+	DisplayeofStart(i);
 	while (true)
 	{
-		HideCursor();
-		MoveCursor(0, 0);
-		cout << "(Q,D)" << endl;
-		cout << first << "+------+" << second << "--------+" << third << "--------+ " << DEFAULT << endl;
-		cout << first << "| Play |" << second << " option |" << third << " Credit |" << DEFAULT << endl;
-		cout << first << "+------+" << second << "--------+" << third << "--------+" << DEFAULT << endl;
-		int move = movement();
-		switch (move)
+
+
+		if (GraphicKey(&i))
 		{
-		case(' '):
-			return Run;
-		case('q'):
-			if (third == GREEN)
-			{
-				first = DEFAULT;
-
-				second = GREEN;
-
-				third = DEFAULT;
-				Run = 1;
-			}
-			else if (second == GREEN)
-			{
-				first = GREEN;
-
-				second = DEFAULT;
-
-				third = DEFAULT;
-
-				Run = 0;
-			}
-			else
-			{
-				first = DEFAULT;
-
-				second = DEFAULT;
-
-				third = GREEN;
-				Run = 2;
-			}
-			break;
-
-		case('d'):
-			if (first == GREEN)
-			{
-				first = DEFAULT;
-
-				second = GREEN;
-
-				third = DEFAULT;
-				Run = 1;
-			}
-			else if (second == GREEN)
-			{
-				first = DEFAULT;
-
-				second = DEFAULT;
-
-				third = GREEN;
-				Run = 2;
-			}
-			else
-			{
-				first = GREEN;
-
-				second = DEFAULT;
-
-				third = DEFAULT;
-				Run = 0;
-			}
-			break;
-		default:
-			continue;
+			return i;
+		}
+		else
+		{
+			DisplayeofStart(i);
 		}
 	}
-
+}
+void DisplayeofStart(int i)
+{
+	const char* first = DEFAULT;
+	const char* second = DEFAULT;
+	const char* third = DEFAULT;
+	if (i == 0)
+	{
+		first = GREEN;
+		second = DEFAULT;
+		third = DEFAULT;
+	}
+	if (i == 1)
+	{
+		first = DEFAULT;
+		second = GREEN;
+		third = DEFAULT;
+	}
+	if (i == 2)
+	{
+		first = DEFAULT;
+		second = DEFAULT;
+		third = GREEN;
+	}
+	HideCursor();
+	MoveCursor(0, 0);
+	cout << "(Q,D)" << endl;
+	cout << first << "+------+" << second << "--------+" << third << "--------+ " << DEFAULT << endl;
+	cout << first << "| Play |" << second << " option |" << third << " Credit |" << DEFAULT << endl;
+	cout << first << "+------+" << second << "--------+" << third << "--------+" << DEFAULT << endl;
 }
 
 int CharaCreationMenu()
