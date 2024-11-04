@@ -369,20 +369,19 @@ int Fightmenu()
 	}
 }
 
-const char* id(tiles* allof, int y, int x)
+void Colorising(tiles* allof, int y, int x)
 {
-	BDEFAULT;
 	if (allof[x].all[y]->enemis == true)
 	{
-		cout << BRED << "  ";
+		cout << BRED << "  " << BDEFAULT;
 	}
 	else if (allof[x].all[y]->Characteer == true)
 	{
-		return BBLUE;
+		cout << BBLUE << "  " << BDEFAULT;
 	}
 	else
 	{
-		return BBROWN;
+		cout << BBROWN << "  " << BDEFAULT;
 	}
 }
 
@@ -394,7 +393,7 @@ void FRAME(tiles* allof)
 	{
 		for (int y = 0; y < size; y++)
 		{
-			(allof, y, i);
+			Colorising(allof, y, i);
 		}
 		cout << BDEFAULT << endl;
 	}

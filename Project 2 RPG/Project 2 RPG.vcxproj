@@ -134,7 +134,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="Visual.cpp" />
-    <ClCompile Include="Project 2 RPG.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>

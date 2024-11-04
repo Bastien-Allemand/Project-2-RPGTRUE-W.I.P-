@@ -30,3 +30,5 @@ void Cmoved(tiles* allof, char cMove, int* x, int* y);
 void makingofmap(tiles* allof, GameManager* GameS);
 
 int FightSequence(EnemisClass* Enemis, CharacterStat* PLayer);
+
+bool CheckEnemis(int* x, int* y, tiles* allof);

@@ -149,6 +149,7 @@ void Cmoved(tiles* allof, char cMove, int* x, int* y)
 		allof[*x].all[*y]->Characteer = true;
 		break;
 	default:
+		allof[*x].all[*y]->Characteer = true;
 		break;
 	}
 }
@@ -189,6 +190,68 @@ void makingofmap(tiles* allof, GameManager* GameS)
 			}
 		}
 	}
+}
+
+bool CheckEnemis(int *x,int *y,tiles* allof)
+{	
+	bool T = false;
+	if (*x != 0)
+	{
+		if (allof[*x - 1].all[*y]->enemis == true)
+		{
+			T = true;
+		}
+	}
+	else if (*x != 31)
+	{
+		if (allof[*x + 1].all[*y]->enemis == true)
+		{
+			T = true;
+		}
+	}
+	else if (*y != 0)
+	{
+		if (allof[*x].all[*y - 1]->enemis == true)
+		{
+			T = true;
+		}
+	}
+	else if (*y != 31)
+	{
+		if (allof[*x].all[*y + 1]->enemis == true)
+		{
+			T = true;
+		}
+	}
+	else if (*x != 0 && *y != 0)
+	{
+		if (allof[*x - 1].all[*y - 1]->enemis == true)
+		{
+			T = true;
+		}
+	}
+	else if (*x != 0 && *y != 31)
+	{
+		if (allof[*x - 1].all[*y + 1]->enemis == true)
+		{
+			T = true;
+		}
+	}
+	else if (*x != 31 && *y != 31)
+	{
+		if (allof[*x + 1].all[*y + 1]->enemis == true)
+		{
+			T = true;
+		}
+	}
+	else if (*x != 31 && *y != 0)
+	{
+		if (allof[*x + 1].all[*y - 1]->enemis == true)
+		{
+			T = true;
+		}
+	}
+	return T;
 }
 
 //int FightSequence(EnemisClass* Enemis, Character* PLayer)

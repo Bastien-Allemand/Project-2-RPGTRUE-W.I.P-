@@ -1,5 +1,7 @@
 #pragma once
 #include "EnemisClass.h"
+#include "Visual.h"
+#include "Utility.h"
 #include "Character.h"
 #include "Tiles.h"
 class GameManager 
