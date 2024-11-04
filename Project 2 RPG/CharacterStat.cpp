@@ -1,5 +1,7 @@
 
 #include "CharacterStat.h"
+#include "Utility.h"
+#include "Sprite.h"
 #include <iostream>
 
 using namespace std;
@@ -49,6 +51,8 @@ void CharacterStat::levelup()
 
 int CharacterStat::FightSequence()
 {
+    MoveCursor(0, 0);
+    AllySprite();
     return 0;
 }
 

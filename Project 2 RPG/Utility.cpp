@@ -1,7 +1,7 @@
 #include "Utility.h"
 #include "Color.h"
-#include "Fighter.h"
 #include "GameManager.h"
+#include "Fighter.h"
 #include "Mage.h"
 #include "Thief.h"
 #include "Tils.h"
@@ -150,30 +150,6 @@ void Cmoved(tils* allof, char cMove, int* x, int* y)
 	default:
 		break;
 	}
-}
-
-void CharacterCreation(int Class)
-{
-	CharacterStat* Player[1];
-	switch (Class)
-	{
-	case(0):
-		Player[0] = new Fighter(20, 4, 2);  //PV ATTACK DEFENSE
-		cout << "Fighter Created" << endl;
-		break;
-	case(1):
-		Player[0] = new Mage(10, 20, 4, 0); //MANA PV ATTACK DEFENSE
-		cout << "Mage Created" << endl;
-		break;
-	case(2):
-		Player[0] = new Thief(8, 20, 3, 1);
-		cout << "Assasin created" << endl;
-		break;
-	default:
-		break;
-	}
-	Player[0]->ShowStat();
-
 }
 
 void makingofmap(tils* allof, GameManager* GameS)

@@ -370,6 +370,7 @@ int Fightmenu()
 
 const char* id(tils* allof, int y, int x)
 {
+	BDEFAULT;
 	if (allof[x].all[y]->Character == true && allof[x].all[y]->enemis == true)
 	{
 		CharacterStat::FightSequence();
