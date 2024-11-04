@@ -1,5 +1,5 @@
 #pragma once
-#include "Tils.h"
+#include "Tiles.h"
 int Menusofopening();
 
 int CharaCreationMenu();
@@ -8,6 +8,6 @@ int OptionMenu();
 
 int Fightmenu();
 
-void FRAME(tils* allof);
+void FRAME(tiles* allof);
 
-const char* id(tils* allof, int y, int x);
+void Colorising(tiles* allof, int y, int x);

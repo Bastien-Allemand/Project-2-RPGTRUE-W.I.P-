@@ -127,27 +127,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CharacterStat.cpp" />
+    <ClCompile Include="Assasin.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="EnemisClass.cpp" />
     <ClCompile Include="Fighter.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Mage.cpp" />
-    <ClCompile Include="Menus.cpp" />
+    <ClCompile Include="Visual.cpp" />
     <ClCompile Include="Project 2 RPG.cpp" />
-    <ClCompile Include="Thief.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CharacterStat.h" />
+    <ClInclude Include="Assasin.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="EnemisClass.h" />
     <ClInclude Include="Fighter.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Mage.h" />
-    <ClInclude Include="Menus.h" />
+    <ClInclude Include="Visual.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Thief.h" />
-    <ClInclude Include="Tils.h" />
+    <ClInclude Include="Tiles.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

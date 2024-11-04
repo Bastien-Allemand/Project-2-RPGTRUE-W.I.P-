@@ -5,7 +5,7 @@ using namespace std;
 
 
 
-EnemisClass::EnemisClass(int Gmana, int HealthMax, int attack, int defense) : CharacterStat(HealthMax, attack, defense)
+EnemisClass::EnemisClass(int Gmana, int HealthMax, int attack, int defense) : Character(HealthMax, attack, defense)
 {
 	Mana = Gmana;
 }
@@ -13,12 +13,11 @@ EnemisClass::EnemisClass(int Gmana, int HealthMax, int attack, int defense) : Ch
 void EnemisClass::levelup()
 {
 	Mana += (Mana * 5) / 100;
-	CharacterStat::levelup();
+	Character::levelup();
 }
 
-void EnemisClass::ShowStat()
+int EnemisClass::ManaGet()
 {
-	CharacterStat::ShowStat();
-	cout << "Mana :" << Mana << endl;
+	return Mana;
 }
 

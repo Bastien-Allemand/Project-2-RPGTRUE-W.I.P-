@@ -1,10 +1,11 @@
 #include "Utility.h"
+#include "Sprite.h"
 #include "Color.h"
 #include "GameManager.h"
 #include "Fighter.h"
+#include "Visual.h"
 #include "Mage.h"
-#include "Thief.h"
-#include "Tils.h"
+#include "Tiles.h"
 #include <iostream>
 #include <windows.h>;
 #include <conio.h>;
@@ -113,9 +114,9 @@ int GetConsoleLength()
 	return csbi.srWindow.Right - csbi.srWindow.Left + 1; // Largeur
 }
 
-void Cmoved(tils* allof, char cMove, int* x, int* y)
+void Cmoved(tiles* allof, char cMove, int* x, int* y)
 {
-	allof[*x].all[*y]->Character = false;
+	allof[*x].all[*y]->Characteer = false;
 	switch (cMove)
 	{
 	case('z'):
@@ -124,35 +125,35 @@ void Cmoved(tils* allof, char cMove, int* x, int* y)
 		{
 			*x += -1;
 		}
-		allof[*x].all[*y]->Character = true;
+		allof[*x].all[*y]->Characteer = true;
 		break;
 	case('q'):
 		if (*y != 0)
 		{
 			*y += -1;
 		}
-		allof[*x].all[*y]->Character = true;
+		allof[*x].all[*y]->Characteer = true;
 		break;
 	case('s'):
 		if (*x != 31)
 		{
 			*x += 1;
 		}
-		allof[*x].all[*y]->Character = true;
+		allof[*x].all[*y]->Characteer = true;
 		break;
 	case('d'):
 		if (*y != 31)
 		{
 			*y += 1;
 		}
-		allof[*x].all[*y]->Character = true;
+		allof[*x].all[*y]->Characteer = true;
 		break;
 	default:
 		break;
 	}
 }
 
-void makingofmap(tils* allof, GameManager* GameS)
+void makingofmap(tiles* allof, GameManager* GameS)
 {
 
 	for (int x = 0; x < 32; x++)
@@ -160,11 +161,11 @@ void makingofmap(tils* allof, GameManager* GameS)
 		for (int y = 0; y < 32; y++)
 		{
 			allof[x].all[y]->enemis = false;
-			allof[x].all[y]->Character = false;
+			allof[x].all[y]->Characteer = false;
 
 			if (x == 31 && y == 16)
 			{
-				allof[x].all[y]->Character = true;
+				allof[x].all[y]->Characteer = true;
 			}
 			if (x == 10 && y == 10)
 			{
@@ -189,3 +190,17 @@ void makingofmap(tils* allof, GameManager* GameS)
 		}
 	}
 }
+
+//int FightSequence(EnemisClass* Enemis, Character* PLayer)
+//{
+//	system("cls");
+//	
+//	EnemisSprite();
+//	AllySprite();
+//	int I = Fightmenu();
+//	if (I == 0)
+//	{
+//		Enemis->takedmg(PLayer->AttackGet());
+//	}
+//	return 0;
+//}

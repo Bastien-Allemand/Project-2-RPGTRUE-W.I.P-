@@ -11,7 +11,7 @@
 #define MAGENTA "\033[35m"
 #define CYAN "\033[36m"
 #define WHITE "\033[37m"
-#define BROWN "\033[38;6;94m"
+#define BROWN "\033[38;5;94m"
 #define ORANGE "\033[38;5;214m"
 #define DEFAULT "\033[39m"
 

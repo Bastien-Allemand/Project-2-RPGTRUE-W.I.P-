@@ -1,6 +1,10 @@
 #pragma once
-#include "Tils.h"
-#include "GameManager.h"
+
+class GameManager;
+class EnemisClass;
+class CharacterStat;
+class tiles;
+
 char movement();
 
 int rgbToAnsi(int r, int g, int b);
@@ -21,8 +25,8 @@ void ClearFullScreen();
 
 int GetConsoleHeight();
 
-void Cmoved(tils* allof, char cMove, int* x, int* y);
+void Cmoved(tiles* allof, char cMove, int* x, int* y);
 
-void CharacterCreation(int Class);
+void makingofmap(tiles* allof, GameManager* GameS);
 
-void makingofmap(tils* allof, GameManager* GameS);
+int FightSequence(EnemisClass* Enemis, CharacterStat* PLayer);

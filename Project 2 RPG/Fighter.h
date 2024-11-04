@@ -1,13 +1,11 @@
 #pragma once
-#include "CharacterStat.h"
-class Fighter :public CharacterStat
+#include "Character.h"
+class Fighter :public Character
 {
 public:
-	Fighter(int HealthMax, int attack, int defense) : CharacterStat(HealthMax, attack, defense)
-	{
 
+	Fighter(int GHealthMax, int GDefense, int GAttack);
 
-	}
-	void ShowStat() override;
-	void levelup() override;
+	void levelup();
 };
+

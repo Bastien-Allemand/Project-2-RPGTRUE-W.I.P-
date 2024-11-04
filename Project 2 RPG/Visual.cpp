@@ -1,8 +1,9 @@
-#include "Menus.h"
+#include "Visual.h"
 #include "Color.h"
 #include "Utility.h"
-#include "CharacterStat.h"
-#include "Tils.h"
+#include "Character.h"
+#include "GameManager.h"
+#include "Tiles.h"
 #include <iostream>
 using namespace std;
 
@@ -368,18 +369,14 @@ int Fightmenu()
 	}
 }
 
-const char* id(tils* allof, int y, int x)
+const char* id(tiles* allof, int y, int x)
 {
 	BDEFAULT;
-	if (allof[x].all[y]->Character == true && allof[x].all[y]->enemis == true)
+	if (allof[x].all[y]->enemis == true)
 	{
-		CharacterStat::FightSequence();
+		cout << BRED << "  ";
 	}
-	else if (allof[x].all[y]->enemis == true)
-	{
-		return BRED;
-	}
-	else if (allof[x].all[y]->Character == true)
+	else if (allof[x].all[y]->Characteer == true)
 	{
 		return BBLUE;
 	}
@@ -389,7 +386,7 @@ const char* id(tils* allof, int y, int x)
 	}
 }
 
-void FRAME(tils* allof)
+void FRAME(tiles* allof)
 {
 	int size = 32;
 	MoveCursor(0, 0);
@@ -397,7 +394,7 @@ void FRAME(tils* allof)
 	{
 		for (int y = 0; y < size; y++)
 		{
-			cout << id(allof, y, i) << "  ";
+			(allof, y, i);
 		}
 		cout << BDEFAULT << endl;
 	}

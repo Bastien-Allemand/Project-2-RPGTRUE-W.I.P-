@@ -1,11 +1,12 @@
 #include "Fighter.h"
-#include "Color.h"
+#include "Character.h"
 
-void Fighter::ShowStat()
+Fighter::Fighter(int GHealthMax, int GDefense, int GAttack) : Character(GHealthMax, GAttack, GDefense)
 {
-	CharacterStat::ShowStat();
+
 }
+
 void Fighter::levelup()
 {
-	CharacterStat::levelup();
+	&Character::levelup;
 }
