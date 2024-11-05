@@ -11,7 +11,7 @@ using namespace std;
 void PlayGame(tiles* allof,GameManager* GameS)
 {
 
-	makingofmap(allof, GameS);
+	GameS->makingofmap();
 	while (true)
 	{
 
@@ -21,27 +21,31 @@ void PlayGame(tiles* allof,GameManager* GameS)
 		{
 		case(0):
 		{
-			FRAME(allof);
+			
+			GameS->CharacterCreation(CharacreationMenu());
+			GameS->FRAME();
 			int x = 31, y = 16;
 			while (true)
 			{
-				char MoveC = movement();
-				Cmoved(allof, MoveC, &x, &y);
+				char MoveC = AskChar();
+				GameS->Cmoved(MoveC, &x, &y);
 				int Ex;
 				int Ey;
-				bool test = CheckEnemis(&x, &y, allof, &Ey, &Ex);
-
-				FRAME(allof);
+				bool test = GameS->CheckEnemis(&x, &y, &Ey, &Ex);
+				if (test)
+				{
+					GameS->FightSequence();
+				}
+				GameS->FRAME();
 
 			}
 		}
 		case(1):
 			ClearFullScreen();
 			MoveCursor(0, 0);
-			cout << "Settings";
-			while (movement() != ' ')
+			while (OptionMenu() != 0)
 			{
-				
+
 			}
 			ClearFullScreen();
 			break;
@@ -49,7 +53,7 @@ void PlayGame(tiles* allof,GameManager* GameS)
 			ClearFullScreen();
 			MoveCursor(0, 0);
 			cout << "MEEEEEEEE";
-			while (movement() != ' ')
+			while (AskChar() != ' ')
 			{
 				
 			}

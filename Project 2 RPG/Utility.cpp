@@ -12,7 +12,7 @@
 
 using namespace std;
 
-char movement()
+char AskChar()
 {
 	char moved = _getch();
 	return moved;
@@ -20,7 +20,7 @@ char movement()
 
 bool GraphicKey(int* i)
 {
-	int move = movement();
+	int move = AskChar();
 	switch (move)
 	{
 	case(' '):
@@ -55,9 +55,6 @@ int rgbToAnsi(int r, int g, int b)
 	int ansiCode = 16 + (36 * (r / 51)) + (6 * (g / 51)) + (b / 51);
 	return ansiCode;
 }
-
-int GetConsoleLength();
-int GetConsoleHeight();
 
 void FullScreen()
 {
@@ -138,173 +135,18 @@ int GetConsoleLength()
 	return csbi.srWindow.Right - csbi.srWindow.Left + 1; // Largeur
 }
 
-void Cmoved(tiles* allof, char cMove, int* x, int* y)
+int getCursorX()
 {
-	allof[*x].all[*y]->Characteer = false;
-	switch (cMove)
-	{
-	case('z'):
-
-		if (*x != 0)
-		{
-			*x += -1;
-		}
-		allof[*x].all[*y]->Characteer = true;
-		break;
-	case('q'):
-		if (*y != 0)
-		{
-			*y += -1;
-		}
-		allof[*x].all[*y]->Characteer = true;
-		break;
-	case('s'):
-		if (*x != 31)
-		{
-			*x += 1;
-		}
-		allof[*x].all[*y]->Characteer = true;
-		break;
-	case('d'):
-		if (*y != 31)
-		{
-			*y += 1;
-		}
-		allof[*x].all[*y]->Characteer = true;
-		break;
-	default:
-		allof[*x].all[*y]->Characteer = true;
-		break;
-	}
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(hConsole, &csbi);
+	return csbi.dwCursorPosition.X;
 }
 
-void makingofmap(tiles* allof, GameManager* GameS)
+int getCursorY()
 {
-
-	for (int x = 0; x < 32; x++)
-	{
-		for (int y = 0; y < 32; y++)
-		{
-			allof[x].all[y]->enemis = false;
-			allof[x].all[y]->Characteer = false;
-
-			if (x == 31 && y == 16)
-			{
-				allof[x].all[y]->Characteer = true;
-			}
-			if (x == 10 && y == 10)
-			{
-				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = &GameS->Mob[0];
-			}
-			if (x == 20 && y == 10)
-			{
-				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = &GameS->Mob[1];
-			}
-			if (x == 10 && y == 20)
-			{
-				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = &GameS->Mob[2];
-			}
-			if (x == 20 && y == 20)
-			{
-				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = &GameS->Mob[3];
-			}
-		}
-	}
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(hConsole, &csbi);
+	return csbi.dwCursorPosition.Y;
 }
-
-bool CheckEnemis(int *x,int *y,tiles* allof,int *Ex,int *Ey)
-{	
-	bool T = false;
-	if (*x != 0)
-	{
-		if (allof[*x - 1].all[*y]->enemis == true)
-		{
-			T = true;
-			*Ex = *x - 1;
-			*Ey = *y;
-		}
-	}
-	if (*x != 31)
-	{
-		if (allof[*x + 1].all[*y]->enemis == true)
-		{
-			T = true;
-			*Ex = *x + 1;
-			*Ey = *y;
-		}
-	}
-	if (*y != 0)
-	{
-		if (allof[*x].all[*y - 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x;
-			*Ey = *y-1;
-		}
-	}
-	if (*y != 31)
-	{
-		if (allof[*x].all[*y + 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x;
-			*Ey = *y+1;
-		}
-	}
-	if (*x != 0 && *y != 0)
-	{
-		if (allof[*x - 1].all[*y - 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x - 1;
-			*Ey = *y-1;
-		}
-	}
-	if (*x != 0 && *y != 31)
-	{
-		if (allof[*x - 1].all[*y + 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x - 1;
-			*Ey = *y+1;
-		}
-	}
-	if (*x != 31 && *y != 31)
-	{
-		if (allof[*x + 1].all[*y + 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x + 1;
-			*Ey = *y+1;
-		}
-	}
-	if (*x != 31 && *y != 0)
-	{
-		if (allof[*x + 1].all[*y - 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x + 1;
-			*Ey = *y-1;
-		}
-	}
-
-	return T;
-}
-
-//int FightSequence(EnemisClass* Enemis, Character* PLayer)
-//{
-//	system("cls");
-//	
-//	EnemisSprite();
-//	AllySprite();
-//	int I = Fightmenu();
-//	if (I == 0)
-//	{
-//		Enemis->takedmg(PLayer->AttackGet());
-//	}
-//	return 0;
-//}

@@ -22,7 +22,7 @@
     <Filter Include="Fichiers sources\Class%27s.cpp">
       <UniqueIdentifier>{25141843-9474-4fb7-806f-e0642e68e769}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\Graphic">
+    <Filter Include="Fichiers sources\Graphic.cpp">
       <UniqueIdentifier>{db0eb5ea-191f-464f-a01c-db318f48ffbf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -52,10 +52,13 @@
       <Filter>Fichiers sources\Class%27s.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>Fichiers sources\Graphic</Filter>
+      <Filter>Fichiers sources\Graphic.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Visual.cpp">
-      <Filter>Fichiers sources\Graphic</Filter>
+      <Filter>Fichiers sources\Graphic.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowStat.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Fichiers d%27en-tête\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="ShowStat.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

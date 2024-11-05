@@ -56,309 +56,159 @@ void DisplayeofStart(int i)
 	cout << first << "+------+" << second << "--------+" << third << "--------+" << DEFAULT << endl;
 }
 
-int CharaCreationMenu()
+int CharacreationMenu()
 {
-
-	int Ran = 0;
-	const char* first = GREEN;
+	int i = 0;
+	DisplayCharacreation(i);
+	while (true)
+	{
+		if (GraphicKey(&i))
+		{
+			return i;
+		}
+		else
+		{
+			DisplayCharacreation(i);
+		}
+	}
+}
+void DisplayCharacreation(int i)
+{
+	const char* first = DEFAULT;
 	const char* second = DEFAULT;
 	const char* third = DEFAULT;
 	const char* fourth = DEFAULT;
-	while (true)
+	if (i == 0)
 	{
-
-		HideCursor();
-		MoveCursor(0, 0);
-
-		cout << "(Q,D)" << endl;
-		cout << "Chose your Class:" << endl;
-		cout << first << "+---------+" << second << "--------+" << third << "--------+ " << DEFAULT << endl;
-		cout << first << "| Fighter |" << second << "  Mage  |" << third << "  Thief |" << DEFAULT << endl;
-		cout << first << "+---------+" << second << "--------+" << third << "--------+" << DEFAULT << endl;
-
-		int move = movement();
-		switch (move)
-		{
-		case(' '):
-			return Ran;
-		case('q'):
-			if (third == GREEN)
-			{
-				first = DEFAULT;
-
-				second = GREEN;
-
-				third = DEFAULT;
-				Ran = 1;
-			}
-			else if (second == GREEN)
-			{
-				first = GREEN;
-
-				second = DEFAULT;
-
-				third = DEFAULT;
-
-				Ran = 0;
-			}
-			else
-			{
-				first = DEFAULT;
-
-				second = DEFAULT;
-
-				third = GREEN;
-				Ran = 2;
-			}
-			break;
-
-		case('d'):
-			if (first == GREEN)
-			{
-				first = DEFAULT;
-
-				second = GREEN;
-
-				third = DEFAULT;
-				Ran = 1;
-			}
-			else if (second == GREEN)
-			{
-				first = DEFAULT;
-
-				second = DEFAULT;
-
-				third = GREEN;
-				Ran = 2;
-			}
-			else
-			{
-				first = GREEN;
-
-				second = DEFAULT;
-
-				third = DEFAULT;
-				Ran = 0;
-			}
-			break;
-
-		default:
-			continue;
-		}
+		first = GREEN;
+		second = DEFAULT;
+		third = DEFAULT;
 	}
+	if (i == 1)
+	{
+		first = DEFAULT;
+		second = GREEN;
+		third = DEFAULT;
+	}
+	if (i == 2)
+	{
+		first = DEFAULT;
+		second = DEFAULT;
+		third = GREEN;
+	}
+	HideCursor();
+	MoveCursor(0, 0);
+	cout << "(Q,D)" << endl;
+	cout << first << "+---------+" << second << "--------+" << third << "--------+ " << DEFAULT << endl;
+	cout << first << "| Fighter |" << second << "  Mage  |" << third << " Assasin|" << DEFAULT << endl;
+	cout << first << "+---------+" << second << "--------+" << third << "--------+" << DEFAULT << endl;
 
 }
 
 int OptionMenu()
 {
-	int Ron = 0;
-	const char* first = GREEN;
-	const char* second = DEFAULT;
-	const char* third = DEFAULT;
-	const char* fourth = DEFAULT;
+	int i = 0;
+	OptionDisplay(i);
 	while (true)
 	{
 
-		HideCursor();
-		MoveCursor(0, 0);
 
-		cout << "(Q,D,Space to Validate)" << endl;
-		cout << "Menu:" << endl;
-		cout << first << "+---------+" << second << "--------+" << third << "--------+ " << DEFAULT << endl;
-		cout << first << "| Go back |" << second << "Nothing |" << third << "Nothing |" << DEFAULT << endl;
-		cout << first << "+---------+" << second << "--------+" << third << "--------+" << DEFAULT << endl;
-
-		int move = movement();
-		switch (move)
+		if (GraphicKey(&i))
 		{
-		case(' '):
-			return Ron;
-		case('q'):
-			if (third == GREEN)
-			{
-				first = DEFAULT;
-
-				second = GREEN;
-
-				third = DEFAULT;
-				Ron = 1;
-			}
-			else if (second == GREEN)
-			{
-				first = GREEN;
-
-				second = DEFAULT;
-
-				third = DEFAULT;
-
-				Ron = 0;
-			}
-			else
-			{
-				first = DEFAULT;
-
-				second = DEFAULT;
-
-				third = GREEN;
-				Ron = 2;
-			}
-			break;
-
-		case('d'):
-			if (first == GREEN)
-			{
-				first = DEFAULT;
-
-				second = GREEN;
-
-				third = DEFAULT;
-				Ron = 1;
-			}
-			else if (second == GREEN)
-			{
-				first = DEFAULT;
-
-				second = DEFAULT;
-
-				third = GREEN;
-				Ron = 2;
-			}
-			else
-			{
-				first = GREEN;
-
-				second = DEFAULT;
-
-				third = DEFAULT;
-				Ron = 0;
-			}
-			break;
-
-		default:
-			continue;
+			return i;
+		}
+		else
+		{
+			OptionDisplay(i);
 		}
 	}
 }
-
-int Fightmenu()
+void OptionDisplay(int i)
 {
-
-	int RU = 0;
-	const char* first = GREEN;
+	const char* first = DEFAULT;
 	const char* second = DEFAULT;
 	const char* third = DEFAULT;
-	const char* fourth = DEFAULT;
-	while (true)
+	if (i == 0)
 	{
-		
-		HideCursor();
-		MoveCursor(10,0);
-
-		cout << "(Q,D,Space to Validate)" << endl;
-		cout << "Menu:" << endl;
-		cout << first << "+---------+" << second << "---------+" << third << "--------+ " << DEFAULT << endl;
-		cout << first << "|  Fight  |" << second << "Item(WIP)|" << third << "Nothing |" << DEFAULT << endl;
-		cout << first << "+---------+" << second << "---------+" << third << "--------+" << DEFAULT << endl;
-
-		int move = movement();
-		switch (move)
-		{
-		case(' '):
-			return RU;
-		case('q'):
-			if (third == GREEN)
-			{
-				first = DEFAULT;
-
-				second = GREEN;
-
-				third = DEFAULT;
-				RU = 1;
-			}
-			else if (second == GREEN)
-			{
-				first = GREEN;
-
-				second = DEFAULT;
-
-				third = DEFAULT;
-
-				RU = 0;
-			}
-			else
-			{
-				first = DEFAULT;
-
-				second = DEFAULT;
-
-				third = GREEN;
-				RU = 2;
-			}
-			break;
-
-		case('d'):
-			if (first == GREEN)
-			{
-				first = DEFAULT;
-
-				second = GREEN;
-
-				third = DEFAULT;
-				RU = 1;
-			}
-			else if (second == GREEN)
-			{
-				first = DEFAULT;
-
-				second = DEFAULT;
-
-				third = GREEN;
-				RU = 2;
-			}
-			else
-			{
-				first = GREEN;
-
-				second = DEFAULT;
-
-				third = DEFAULT;
-				RU = 0;
-			}
-			break;
-
-		default:
-			continue;
-		}
+		first = GREEN;
+		second = DEFAULT;
+		third = DEFAULT;
 	}
-}
-
-void Colorising(tiles* allof, int y, int x)
-{
-	if (allof[x].all[y]->enemis == true)
+	if (i == 1)
 	{
-		cout << BRED << "  " << BDEFAULT;
+		first = DEFAULT;
+		second = GREEN;
+		third = DEFAULT;
 	}
-	else if (allof[x].all[y]->Characteer == true)
+	if (i == 2)
 	{
-		cout << BBLUE << "  " << BDEFAULT;
+		first = DEFAULT;
+		second = DEFAULT;
+		third = GREEN;
 	}
-	else
-	{
-		cout << BBROWN << "  " << BDEFAULT;
-	}
-}
-
-void FRAME(tiles* allof)
-{
-	int size = 32;
+	HideCursor();
 	MoveCursor(0, 0);
-	for (int i = 0; i < size; i++)
+
+	cout << "(Q,D,Space to Validate)" << endl;
+	cout << "Menu:" << endl;
+	cout << first << "+---------+" << second << "--------+" << third << "--------+ " << DEFAULT << endl;
+	cout << first << "| Go back |" << second << "Nothing |" << third << "Nothing |" << DEFAULT << endl;
+	cout << first << "+---------+" << second << "--------+" << third << "--------+" << DEFAULT << endl;
+
+}
+
+int FightMenu()
+{
+	int i = 0;
+	int xfix = getCursorX();
+	int yfix = getCursorY();
+	FightDisplay(xfix,yfix,i);
+	while (true)
 	{
-		for (int y = 0; y < size; y++)
+
+
+		if (GraphicKey(&i))
 		{
-			Colorising(allof, y, i);
+			return i;
 		}
-		cout << BDEFAULT << endl;
+		else
+		{
+			FightDisplay(xfix,yfix, i);
+		}
 	}
+}
+void FightDisplay(int xfix,int yfix ,int i)
+{
+	const char* first = DEFAULT;
+	const char* second = DEFAULT;
+	const char* third = DEFAULT;
+	if (i == 0)
+	{
+		first = GREEN;
+		second = DEFAULT;
+		third = DEFAULT;
+	}
+	if (i == 1)
+	{
+		first = DEFAULT;
+		second = GREEN;
+		third = DEFAULT;
+	}
+	if (i == 2)
+	{
+		first = DEFAULT;
+		second = DEFAULT;
+		third = GREEN;
+	}
+	HideCursor();
+	
+	MoveCursor(xfix, yfix);
+
+	cout << "(Q,D,Space to Validate)"; MoveCursor(xfix, yfix);
+	cout << "Menu:"; MoveCursor(xfix, yfix+1);
+	cout << first << "+---------+" << second << "---------+" << third << "--------+ " << DEFAULT; MoveCursor(xfix, yfix+2);
+	cout << first << "|  Fight  |" << second << "Item(WIP)|" << third << "Nothing |" << DEFAULT; MoveCursor(xfix, yfix+3);
+	cout << first << "+---------+" << second << "---------+" << third << "--------+" << DEFAULT; MoveCursor(xfix, yfix+4);
+
 }
 

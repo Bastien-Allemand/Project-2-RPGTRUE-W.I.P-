@@ -133,6 +133,7 @@
     <ClCompile Include="Fighter.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Mage.cpp" />
+    <ClCompile Include="ShowStat.cpp" />
     <ClCompile Include="Visual.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Fighter.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Mage.h" />
+    <ClInclude Include="ShowStat.h" />
     <ClInclude Include="Visual.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tiles.h" />

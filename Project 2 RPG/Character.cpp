@@ -1,4 +1,5 @@
 #include "Character.h"
+#include "ShowStat.h"
 #include <iostream>
 
 Character::Character(int GHealthMax, int GDefense, int GAttack)
@@ -7,6 +8,17 @@ Character::Character(int GHealthMax, int GDefense, int GAttack)
 	Defense = GDefense;
 	Attack = GAttack;
 	Health = GHealthMax;
+	ShowStat* StatOf = (ShowStat*)malloc(sizeof(ShowStat) * 6);
+	for (int i = 0; i < 1; i++)
+	{
+		StatOf[0]
+	}
+	add(StatOf,"Health Max", HealthMax);
+}
+
+void Character::add(ShowStat* list,const char* StatName, int Statnbr)
+{
+	list[0]
 }
 
 bool Character::IsDead()

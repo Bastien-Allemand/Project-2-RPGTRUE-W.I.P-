@@ -1,18 +1,14 @@
 #pragma once
 #include "Tiles.h"
 
-int CharaCreationMenu();
+int CharacreationMenu();
+void DisplayCharacreation(int i);
 
 int OptionMenu();
+void OptionDisplay(int i);
 
-int Fightmenu();
-
-void FRAME(tiles* allof);
-
-void Colorising(tiles* allof, int y, int x);
-
-bool GraphicKey(int* i);
+int FightMenu();
+void FightDisplay(int xfix,int yfix,int i);
 
 int StartMenu();
-
 void DisplayeofStart(int i);

@@ -5,7 +5,7 @@ class EnemisClass;
 class CharacterStat;
 class tiles;
 
-char movement();
+char AskChar();
 
 int rgbToAnsi(int r, int g, int b);
 
@@ -25,12 +25,8 @@ void ClearFullScreen();
 
 int GetConsoleHeight();
 
-void Cmoved(tiles* allof, char cMove, int* x, int* y);
-
-void makingofmap(tiles* allof, GameManager* GameS);
-
-int FightSequence(EnemisClass* Enemis, CharacterStat* PLayer);
-
-bool CheckEnemis(int* x, int* y, tiles* allof,int* Ex,int* Ey);
-
 bool GraphicKey(int* i);
+
+int getCursorX();
+
+int getCursorY();

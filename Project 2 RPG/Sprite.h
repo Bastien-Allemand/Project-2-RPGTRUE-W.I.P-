@@ -1,4 +1,5 @@
 #pragma once
 
-void AllySprite();
+
+void AllySprite(int x,int y);
 void EnemisSprite();

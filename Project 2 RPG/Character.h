@@ -1,4 +1,6 @@
 #pragma once
+#include "ShowStat.h"
+#include "Character.h"
 class Character
 {
 	int HealthMax;
@@ -13,6 +15,8 @@ public:
 	int y;
 
 	Character(int GHealthMax, int GDefense, int GAttack);
+	
+	void add(ShowStat* list, const char* StatName, int Statnbr);
 
 	bool IsDead();
 
