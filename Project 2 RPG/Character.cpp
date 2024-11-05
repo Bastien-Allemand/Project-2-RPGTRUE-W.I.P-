@@ -11,12 +11,15 @@ Character::Character(int GHealthMax, int GDefense, int GAttack)
 	StatOf = (ShowStat*)malloc(sizeof(ShowStat) * 6);
 
 	add(0,"Health Max: ", HealthMax);
-	add(0, "Health: ", Health);
+	add(1, "Health: ", Health);
+	add(2, "Defense: ", Defense);
+	add(3, "Attack: ", Attack);
 }
 
 void Character::add(int i,const char* StatName, int Statnbr)
 {
-	StatOf[0].StatName = StatName;
+	StatOf[i].StatName = StatName;
+	StatOf[i].StatNbr = Statnbr;
 }
 
 bool Character::IsDead()
