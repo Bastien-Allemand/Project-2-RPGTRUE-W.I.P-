@@ -8,17 +8,15 @@ Character::Character(int GHealthMax, int GDefense, int GAttack)
 	Defense = GDefense;
 	Attack = GAttack;
 	Health = GHealthMax;
-	ShowStat* StatOf = (ShowStat*)malloc(sizeof(ShowStat) * 6);
-	for (int i = 0; i < 1; i++)
-	{
-		StatOf[0]
-	}
-	add(StatOf,"Health Max", HealthMax);
+	StatOf = (ShowStat*)malloc(sizeof(ShowStat) * 6);
+
+	add(0,"Health Max: ", HealthMax);
+	add(0, "Health: ", Health);
 }
 
-void Character::add(ShowStat* list,const char* StatName, int Statnbr)
+void Character::add(int i,const char* StatName, int Statnbr)
 {
-	list[0]
+	StatOf[0].StatName = StatName;
 }
 
 bool Character::IsDead()

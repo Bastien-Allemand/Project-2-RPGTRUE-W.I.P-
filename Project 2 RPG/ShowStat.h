@@ -1,11 +1,9 @@
 #pragma once
 class ShowStat
 {
-
-	char StatName;
+public:
+	const char* StatName;
 
 	int StatNbr;
-public:
-
 };
 

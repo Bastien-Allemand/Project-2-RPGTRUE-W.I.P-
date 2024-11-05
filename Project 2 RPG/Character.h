@@ -11,12 +11,12 @@ class Character
 public:
 
 	int x;
-
+	ShowStat* StatOf;
 	int y;
 
 	Character(int GHealthMax, int GDefense, int GAttack);
 	
-	void add(ShowStat* list, const char* StatName, int Statnbr);
+	void add(int i, const char* StatName, int Statnbr);
 
 	bool IsDead();
 
