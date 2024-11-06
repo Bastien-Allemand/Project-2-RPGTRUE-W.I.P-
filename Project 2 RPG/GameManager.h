@@ -23,8 +23,6 @@ public:
 
 	void makingofmap();
 
-	void PlayerStatwindow();
-
 	void Cmoved(char cMove, int* x, int* y);
 
 	bool CheckEnemis(int* x, int* y, int* Ex, int* Ey);

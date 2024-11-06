@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "Tiles.h"
+#include "Character.h"
 #include "Assasin.h"
 #include "Fighter.h"
 #include "Mage.h"
@@ -244,14 +245,29 @@ bool GameManager::CheckEnemis(int* x, int* y,int* Ex, int* Ey)
 	return T;
 }
 
-int GameManager::FightSequence()
+int GameManager::FightSequence(EnemisClass::)
 {
 	AllySprite(64,0);
 	MoveCursor(64, 17);
-	PlayerStatwindow();
-
+	//for (int i = 0; i < sizeof(Character::StatOf); i++)
+	//{
+	//	cout << Character::StatOf.StatName;
+	//}
 	MoveCursor(64, 11);
-	FightMenu();
+	int i = FightMenu();
+	switch (i)
+	{
+	case(0):
+		GameManager::
+	case(1):
+
+	case(2):
+
+	default:
+		break;
+	}
+
+
 
 	return 0;
 }
