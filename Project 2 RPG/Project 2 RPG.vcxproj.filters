@@ -57,9 +57,6 @@
     <ClCompile Include="Visual.cpp">
       <Filter>Fichiers sources\Graphic.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="ShowStat.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utility.h">
@@ -94,9 +91,6 @@
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Fichiers d%27en-tête\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="ShowStat.h">
-      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

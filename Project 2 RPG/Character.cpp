@@ -1,27 +1,16 @@
 #include "Character.h"
-#include "ShowStat.h"
+#include "Color.h"
+#include "Utility.h"
 #include <iostream>
+using namespace std;
 
-Character::Character(int GHealthMax, int GDefense, int GAttack)
+Character::Character(int GHealthMax, int GAttack, int GDefense)
 {
 	HealthMax = GHealthMax;
 	Defense = GDefense;
 	Attack = GAttack;
 	Health = GHealthMax;
-	StatOf = (ShowStat*)malloc(sizeof(ShowStat) * 6);
-
-	add(0,"Health Max: ", HealthMax);
-	add(1, "Health: ", Health);
-	add(2, "Defense: ", Defense);
-	add(3, "Attack: ", Attack);
 }
-
-void Character::add(int i,const char* StatName, int Statnbr)
-{
-	StatOf[i].StatName = StatName;
-	StatOf[i].StatNbr = Statnbr;
-}
-
 bool Character::IsDead()
 {
 	if (Health <= 0)
@@ -43,7 +32,7 @@ void Character::heal(int healing)
 	}
 }
 
-void Character::takedmg(int DMG)
+void Character::takedmg(int DMG,int Defense)
 {
 	if (DMG - Defense <= 0)
 	{
@@ -57,13 +46,37 @@ void Character::takedmg(int DMG)
 
 void Character::levelup()
 {
-	HealthMax += (HealthMax * 10) / 100;
+	HealthMax += HealthMax*0,010;
 
-	Attack += (Attack * 5) / 100;
+	Attack += 1;
 
-	Defense += (Defense * 5) / 100;
+	Defense += Defense*0,05;
 
 	Health = HealthMax;
+}
+
+void Character::ShowStat()
+{
+	int x = getCursorX(), y = getCursorY();
+
+	MoveCursor(x,y);
+	cout << "Health: " << Health << " / " << HealthMax;
+	int heart = ((Health * 100) / HealthMax) / 10;
+	cout << "[";
+	for (int i = 0; i < heart; i++)
+	{
+		cout << SBGREEN << " " << BDEFAULT;
+	}
+	for (int i = heart; i < 10; i++)
+	{
+		cout << BGREEN << " " << BDEFAULT;
+	}
+	cout << "]";
+	MoveCursor(x, y+1);
+	cout << "Attack: " << Attack;
+	MoveCursor(x, y+2);
+	cout << "Defense: " << Defense;
+
 }
 
 int Character::AttackGet()

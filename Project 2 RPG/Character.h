@@ -1,5 +1,4 @@
 #pragma once
-#include "ShowStat.h"
 #include "Character.h"
 class Character
 {
@@ -11,18 +10,15 @@ class Character
 public:
 
 	int x;
-	ShowStat* StatOf;
 	int y;
 
 	Character(int GHealthMax, int GDefense, int GAttack);
-	
-	void add(int i, const char* StatName, int Statnbr);
 
 	bool IsDead();
 
 	void heal(int healing);
 
-	void takedmg(int DMG);
+	void takedmg(int DMG,int Defense);
 
 	int AttackGet();
 
@@ -33,6 +29,8 @@ public:
 	int DefenseGet();
 
 	void levelup();
+
+	void ShowStat();
 
 };
 

@@ -202,7 +202,7 @@ void FightDisplay(int xfix,int yfix ,int i)
 	}
 	HideCursor();
 	
-	MoveCursor(xfix, yfix);
+	MoveCursor(xfix+6, yfix);
 
 	cout << "(Q,D,Space to Validate)"; MoveCursor(xfix, yfix);
 	cout << "Menu:"; MoveCursor(xfix, yfix+1);

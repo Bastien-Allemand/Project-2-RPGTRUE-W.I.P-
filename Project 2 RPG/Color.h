@@ -24,7 +24,6 @@
 #define BMAGENTA "\033[45m"
 #define BCYAN "\033[46m"
 #define BWHITE "\033[47m"
-
 #define BBROWN "\033[48;5;94m"
 #define BORANGE "\033[48;5;214m"
 
@@ -49,6 +48,7 @@
 #define SBMAGENTA "\033[105m"
 #define SBCYAN "\033[106m"
 #define SBWHITE "\033[107m"
+#define SBBROWN "\033[48;5;130m"
 #define SBDEFAULT "\033[109m"
 //EFFECT
 #define BOLDON "\033[1m"

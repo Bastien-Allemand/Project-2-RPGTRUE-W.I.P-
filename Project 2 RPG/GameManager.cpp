@@ -26,10 +26,10 @@ GameManager::GameManager()
 
 	Mob = (EnemisClass*)malloc(sizeof(EnemisClass) * 4);
 
-	Mob[0] = EnemisClass(0, 10, 2, 0);
-	Mob[1] = EnemisClass(0, 10, 2, 0);
-	Mob[2] = EnemisClass(0, 10, 2, 0);
-	Mob[3] = EnemisClass(0, 10, 2, 0);
+	Mob[0] = EnemisClass(1, 10, 1, 1);
+	Mob[1] = EnemisClass(1, 10, 1, 2);
+	Mob[2] = EnemisClass(1, 10, 1, 3);
+	Mob[3] = EnemisClass(0, 10, 1, 4);
 }
 
 void GameManager::CharacterCreation(int Class)
@@ -38,17 +38,15 @@ void GameManager::CharacterCreation(int Class)
 	switch (Class)
 	{
 	case(0):
-		Player = new Fighter(20, 2, 4); 
-
-		//PV defense Attack
+		Player = new Fighter(20, 4, 7); //PV defense Attack
 		cout << "Fighter Created" << endl;
 		break;
 	case(1):
-		Player = new Mage(10, 20, 0, 4); //MANA PV defense Attack
+		Player = new Mage(10, 20, 2, 5); //MANA PV defense Attack
 		cout << "Mage Created" << endl;
 		break;
 	case(2):
-		Player = new Assasin(8, 20, 1, 3);
+		Player = new Assasin(8, 20, 3, 3);
 		cout << "Assasin created" << endl;
 		break;
 	default:
@@ -65,11 +63,11 @@ void GameManager::Colorising(int y, int x)
 	}
 	else if (allof[x].all[y]->Characteer == true)
 	{
-		cout << BBLUE << "  " << BDEFAULT;
+		cout << SBBLUE << "  " << BDEFAULT;
 	}
 	else
 	{
-		cout << BBROWN << "  " << BDEFAULT;
+		cout << SBBROWN << "  " << BDEFAULT;
 	}
 }
 
@@ -124,7 +122,6 @@ void  GameManager::makingofmap()
 		}
 	}
 }
-
 
 void GameManager::Cmoved(char cMove, int* x, int* y)
 {
@@ -245,29 +242,88 @@ bool GameManager::CheckEnemis(int* x, int* y,int* Ex, int* Ey)
 	return T;
 }
 
-int GameManager::FightSequence(EnemisClass::)
+int GameManager::FightSequence(EnemisClass Mob)
 {
-	AllySprite(64,0);
-	MoveCursor(64, 17);
-	//for (int i = 0; i < sizeof(Character::StatOf); i++)
-	//{
-	//	cout << Character::StatOf.StatName;
-	//}
-	MoveCursor(64, 11);
-	int i = FightMenu();
-	switch (i)
+	AllySprite(64, 0);
+	bool endof = false;
+	bool wintest = false;
+	while (!endof)
 	{
-	case(0):
-		GameManager::
-	case(1):
 
-	case(2):
+		MoveCursor(64, 17);
+		Player->ShowStat();
 
-	default:
-		break;
+		MoveCursor(94, 18);
+		cout << "Attack: " << Mob.AttackGet();
+		MoveCursor(94, 19);
+		cout << "Defense: " << Mob.DefenseGet();
+
+
+		MoveCursor(64, 11);
+		int i = FightMenu();
+		switch (i)
+		{
+		case(0):
+			Mob.takedmg(Player->AttackGet(),Mob.DefenseGet());
+			
+			if (Mob.IsDead())
+			{
+				wintest = true;
+				endof = true;
+				break;
+			}
+			Player->takedmg(Mob.AttackGet(), Player->DefenseGet());
+			
+			if (Player->IsDead())
+			{
+				endof = true;
+				break;
+			}
+			break;
+		case(1):
+			Mob.takedmg(Player->AttackGet(), Mob.DefenseGet());
+			if (Mob.IsDead())
+			{
+				wintest = true;
+				endof = true;
+				break;
+			}
+			Player->takedmg(Mob.AttackGet(), Player->DefenseGet());
+			if (Player->IsDead())
+			{
+				endof = true;
+				break;
+			}
+			break;
+		case(2):
+			Mob.takedmg(Player->AttackGet(), Mob.DefenseGet());
+			if (Mob.IsDead())
+			{
+				wintest = true;
+				endof = true;
+				break;
+			}
+			Player->takedmg(Mob.AttackGet(), Player->DefenseGet());
+			if (Player->IsDead())
+			{
+				endof = true;
+				break;
+			}
+			break;
+		default:
+			exit(1);
+			break;
+		}
+	}
+	if (wintest)
+	{
+		Player->levelup();
+		return 0;
+	}
+	else
+	{
+		return 1;
 	}
 
-
-
-	return 0;
+	
 }

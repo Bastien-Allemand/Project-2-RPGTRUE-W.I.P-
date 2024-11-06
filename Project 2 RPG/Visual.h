@@ -12,3 +12,4 @@ void FightDisplay(int xfix,int yfix,int i);
 
 int StartMenu();
 void DisplayeofStart(int i);
+

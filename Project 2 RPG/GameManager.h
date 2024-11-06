@@ -27,6 +27,6 @@ public:
 
 	bool CheckEnemis(int* x, int* y, int* Ex, int* Ey);
 
-	int FightSequence();
+	int FightSequence(EnemisClass Mob);
 };
 

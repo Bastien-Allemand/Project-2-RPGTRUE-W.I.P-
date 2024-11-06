@@ -7,6 +7,7 @@ public:
 	Mage(int Gmana, int GHealthMax, int GDefense, int GAttack);
 
 	int ManaGet();
+	void ShowStat();
 	void levelup();
 };
 
