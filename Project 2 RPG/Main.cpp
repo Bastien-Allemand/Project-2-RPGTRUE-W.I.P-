@@ -2,11 +2,14 @@
 #include "Tiles.h"
 #include "Visual.h"
 #include "GameManager.h"
+#include "Color.h"
 #include <conio.h>
 #include <windows.h>
 #include <iostream>
 
 using namespace std;
+
+void PlayAgain();
 
 void PlayGame(tiles* allof,GameManager* GameS)
 {
@@ -43,26 +46,12 @@ void PlayGame(tiles* allof,GameManager* GameS)
 				GameS->Player->ShowStat();
 				if (test)
 				{
+
 					int i = GameS->FightSequence(GameS->allof[Ex].all[Ey]->Mob,x,y);
 					if (i == 1)
 					{
 						system("cls");
-						cout << "GAME OVER";
-						AskChar();
-						exit(0);
-					}
-					else
-					{
-						
-						GameS->allof[Ey].all[Ex]->enemis = false;
-						K--;
- 						if (K == 0)
-						{
-							system("cls");
-							cout << "WIN";
-							AskChar();
-							exit(0);
-						}
+						PlayAgain();
 					}
 					ClearScreen(64, 0, 75, 21);
 					
@@ -71,8 +60,12 @@ void PlayGame(tiles* allof,GameManager* GameS)
 					MoveCursor(64, 15);
 					GameS->Player->ShowStat();
 				}
-				
+			if (GameS->Checkforwin())
+			{
+				system("CLS");
+				cout << SGREEN << "YOU WIN" << SDEFAULT;
 
+			}
 			}
 			break;
 		}
@@ -99,9 +92,9 @@ void PlayGame(tiles* allof,GameManager* GameS)
 			break;
 		}
 	}
-
-
 }
+
+
 
 int main()
 {
@@ -111,4 +104,20 @@ int main()
 	PlayGame(Games->allof, Games);
 	return 0;
 
+}
+
+void PlayAgain()
+{
+	int replay;
+	cout << " You Lose!" << endl;
+	cout << "Play Again?(0),(1)" << endl;
+	cin >> replay;
+	if (replay == 0)
+	{
+		main();
+	}
+	else
+	{
+		cout << "GOOD BYE :D";
+	}
 }

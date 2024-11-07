@@ -106,8 +106,8 @@ void Character::ShowEstat()
 	int x = getCursorX(), y = getCursorY();
 
 	MoveCursor(x, y);
-	cout << "Health: " << HealthGet() << " / " << MaxHealthGet();
-	int heart = ((HealthGet() * 100) / MaxHealthGet()) / 10;
+	cout << "Health: " << Health << " / " << HealthMax;
+	int heart = ((Health * 100) / HealthMax) / 10;
 	cout << "[";
 	for (int i = 0; i < heart; i++)
 	{

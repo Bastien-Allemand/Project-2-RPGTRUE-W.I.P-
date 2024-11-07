@@ -243,13 +243,13 @@ int GameManager::FightSequence(Character *Mob,int x,int y)
 		case 0:
 			Mob->takedmg(Player->DmgGet(),Mob->DefenseGet());
 			MoveCursor(64, 20);
-			if (Mob->IsDead())
+			if (allof[Mob->x].all[Mob->y]->Mob->IsDead())
 			{
 				wintest = true;
 				endof = true;
 				break;
 			}
-			Player->takedmg(Mob->AttackGet(), Player->DefenseGet());
+			Player->takedmg(Mob->DmgGet(), Player->DefenseGet());
 			AskChar();
 			MoveCursor(64, 20);
 			if (Player->IsDead())
@@ -259,20 +259,6 @@ int GameManager::FightSequence(Character *Mob,int x,int y)
 			}
 			break;
 		case 1:
-			Mob->takedmg(Player->DmgGet(), Mob->DefenseGet());
-			if (Mob->IsDead())
-			{
-				wintest = true;
-				endof = true;
-				break;
-			}
-			Player->takedmg(Mob->AttackGet(), Player->DefenseGet());
-			if (Player->IsDead())
-			{
-				endof = true;
-				break;
-
-			}
 			break;
 		case 2:
 		{
@@ -285,25 +271,28 @@ int GameManager::FightSequence(Character *Mob,int x,int y)
 				cout << "You use Slash";
 				if (Mob->IsDead())
 				{
+					
 					wintest = true;
 					endof = true;
 					break;
 				}
-				Player->takedmg(Mob->AttackGet(), Player->DefenseGet());
+				Player->takedmg(Mob->DmgGet(), Player->DefenseGet());
 				if (Player->IsDead())
 				{
 					endof = true;
 					break;
 				}
 				break;
+
 			case 1:
-				Player->takedmg(Mob->AttackGet(), Player->DefenseGet() + 5);
+				Player->takedmg(Mob->DmgGet(), Player->DefenseGet() + 5);
 				if (Player->IsDead())
 				{
 					endof = true;
 					break;
 				}
 				break;
+
 			case 2:
 				break;
 
@@ -334,43 +323,95 @@ int GameManager::FightSequence(Character *Mob,int x,int y)
 	
 }
 
-void GameManager::SpectreMove(int *Ex, int *Ey)
+void GameManager::GetSpecter(int* x, int* Y)
+{
+	int size = 32;
+	for (int i = 0; i < size; i++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			if (allof[i].all[y]->Mob->Specter == true)
+			{
+				*x = i;
+				*Y = y;
+			}
+		}
+	}
+
+}
+
+void GameManager::SpectreMove()
 {
 	
 	int x = GetPlayerx();
 	int y = GetPlayery();
-	int beforex = *Ex;
-	int beforey = *Ey;
-	if (x > *Ex)
+	int Sx,Sy;
+	GetSpecter(&Sx, &Sy);
+	int beforex = Sx;
+	int beforey = Sx;
+	if (x > Sx)
 	{
-		if (Moveto(Ex, Ey, *Ex - 1, *Ey, false))
+		if (Moveto(&Sx,&Sy, Sx - 1, Sy, false))
 		{
-			*Ex -= 1;
+			Sx -= 1;
 		}
 	}
 	else
 	{
-		if (Moveto(Ex, Ey, *Ex + 1, *Ey, false))
+		if (Moveto(&Sx, &Sy, Sx + 1, Sy, false))
 		{
-			*Ex += 1;
+			Sx += 1;
 		}
 	}
-	if (y > *Ey)
+	if (y > Sy)
 	{
-		if (Moveto(Ex, Ey, *Ex, *Ey-1, false))
+		if (Moveto(&Sx, &Sy, Sx, Sy-1, false))
 		{
-			*Ey -= 1;
+			Sy -= 1;
 		}
 	}
 	else
 	{
-		if (Moveto(Ex, Ey, *Ex, *Ey+1, false))
+		if (Moveto(&Sx,&Sy, Sx, Sy+1, false))
 		{
-			*Ey += 1;
+			Sy += 1;
 		}
 	}
-	allof[*Ex].all[*Ey]->enemis = true;
+	allof[Sx].all[Sy]->enemis = true;
 	allof[beforex].all[beforey]->enemis = false;
-	allof[*Ex].all[*Ey]->Mob = allof[beforex].all[beforey]->Mob;
+	allof[Sx].all[Sy]->Mob = allof[beforex].all[beforey]->Mob;
+	cout << allof[Sx].all[Sy]->Mob->AttackGet();
 	allof[beforex].all[beforey]->Mob = NULL;
+}
+
+bool GameManager::Checkforwin()
+{
+	bool test = true;
+	int size = 32;
+	for (int i = 0; i < size; i++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			if (allof[y].all[i]->enemis == true)
+			{
+				test = true;
+				if (allof[i].all[y]->Mob->IsDead())
+				{
+					allof[y].all[i]->enemis = false;
+					
+				}
+			}
+		}
+	}
+	for (int i = 0; i < size; i++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			if (allof[i].all[y]->enemis == true)
+			{
+				test = false;
+			}
+		}
+	}
+	return test;
 }

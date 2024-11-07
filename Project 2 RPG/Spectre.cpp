@@ -6,8 +6,7 @@
 using namespace std;
 Spectre::Spectre(int HealthMax, int attack, int defense) :Character(HealthMax, attack, defense)
 {
-	x = 20;
-	y = 20;
+	Specter = true;
 }
 
 
@@ -21,7 +20,7 @@ bool Spectre::takedmg(int DMG, int Defense)
 		}
 		else
 		{
-			GameManager::GetInstance()->SpectreMove(&x, &y);
+			GameManager::GetInstance()->SpectreMove();
 		}
 	}
 

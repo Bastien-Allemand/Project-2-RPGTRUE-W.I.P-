@@ -2,12 +2,15 @@
 #include "Character.h"
 class Character
 {
+	
+public:
+
 	int HealthMax;
 	int Health;
 	int Defense;
 	int Attack;
+	bool Specter = false;
 
-public:
 
 	int x;
 	int y;
@@ -34,7 +37,7 @@ public:
 
 	void levelup();
 
-	virtual void ShowStat();
+	void ShowStat();
 
 	void ShowEstat();
 

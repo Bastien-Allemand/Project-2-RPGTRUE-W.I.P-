@@ -35,9 +35,12 @@ public:
 
 	int FightSequence(Character *Mob,int x,int y);
 
+	void GetSpecter(int* x, int* y);
+
 	void FightChoice(int i);
 
-	void SpectreMove(int* Ex, int* Ey);
+	void SpectreMove();
+	bool Checkforwin();
 };
 
 	
