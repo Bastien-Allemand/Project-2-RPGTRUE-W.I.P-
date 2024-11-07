@@ -105,6 +105,7 @@ void PlayGame(tiles* allof,GameManager* GameS)
 
 int main()
 {
+	srand(time(0));
 	GameManager Games;
 	FullScreen();
 	PlayGame(Games.allof, &Games);

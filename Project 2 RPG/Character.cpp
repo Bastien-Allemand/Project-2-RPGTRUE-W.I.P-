@@ -34,13 +34,28 @@ void Character::heal(int healing)
 
 void Character::takedmg(int DMG,int Defense)
 {
+	int Chance = rand() % CritGet();
+	int miss = rand() % 30;
 	if (DMG - Defense <= 0)
 	{
 		Health -= 0;
 	}
 	else
 	{
-		Health -= DMG - Defense;
+		if (Chance == 1)
+		{
+			Health -= DMG*2 - Defense;
+			cout << "CRITICAL HIT ";
+		}
+		else if(miss == 0)
+		{
+			cout << "you Missed";
+		}
+		else
+		{
+			Health -= DMG - Defense;
+		}
+
 	}
 }
 
@@ -111,6 +126,11 @@ int Character::AttackGet()
 int Character::DefenseGet()
 {
 	return Defense;
+}
+
+int Character::CritGet()
+{
+	return 0;
 }
 
 int Character::HealthGet()

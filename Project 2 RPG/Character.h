@@ -28,6 +28,8 @@ public:
 
 	int DefenseGet();
 
+	virtual int CritGet();
+
 	void levelup();
 
 	virtual void ShowStat();

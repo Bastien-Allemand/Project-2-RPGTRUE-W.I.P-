@@ -295,6 +295,7 @@ int GameManager::FightSequence(Character Mob)
 			{
 				endof = true;
 				break;
+
 			}
 			break;
 		case(2):
@@ -303,6 +304,7 @@ int GameManager::FightSequence(Character Mob)
 			{
 			case(0):
 				Mob.takedmg(Player->AttackGet()+5, Mob.DefenseGet());
+				cout << "You use Slash";
 				if (Mob.IsDead())
 				{
 					wintest = true;
