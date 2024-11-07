@@ -23,8 +23,9 @@ void PlayGame(tiles* allof,GameManager* GameS)
 		{
 			
 			GameS->CharacterCreation(CharacreationMenu());
-
+			int Rounds = 0;
 			GameS->FRAME();
+			cout << Rounds;
 			MoveCursor(64, 15);
 			GameS->Player->ShowStat();
 			int x = 31, y = 16;
@@ -35,7 +36,9 @@ void PlayGame(tiles* allof,GameManager* GameS)
 				int Ex;
 				int Ey;
 				bool test = GameS->CheckEnemis(&x, &y, &Ey, &Ex);
+				Rounds++;
 				GameS->FRAME();
+				cout << Rounds;
 				MoveCursor(64, 15);
 				GameS->Player->ShowStat();
 				if (test)
@@ -62,7 +65,9 @@ void PlayGame(tiles* allof,GameManager* GameS)
 						}
 					}
 					ClearScreen(64, 0, 75, 21);
+					
 					GameS->FRAME();
+					cout << Rounds;
 					MoveCursor(64, 15);
 					GameS->Player->ShowStat();
 				}

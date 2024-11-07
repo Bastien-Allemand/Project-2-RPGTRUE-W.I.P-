@@ -245,6 +245,7 @@ bool GameManager::CheckEnemis(int* x, int* y,int* Ex, int* Ey)
 
 int GameManager::FightSequence(Character Mob)
 {
+
 	AllySprite(64, 0);
 	bool endof = false;
 	bool wintest = false;
@@ -301,16 +302,33 @@ int GameManager::FightSequence(Character Mob)
 			switch (skill)
 			{
 			case(0):
-				//slash
+				Mob.takedmg(Player->AttackGet()+5, Mob.DefenseGet());
+				if (Mob.IsDead())
+				{
+					wintest = true;
+					endof = true;
+					break;
+				}
+				Player->takedmg(Mob.AttackGet(), Player->DefenseGet());
+				if (Player->IsDead())
+				{
+					endof = true;
+					break;
+				}
 				break;
 			case(1):
-				//shield
+				Player->takedmg(Mob.AttackGet(), Player->DefenseGet()+5);
+				if (Player->IsDead())
+				{
+					endof = true;
+					break;
+				}
 				break;
 			case(2):
 				break;
 
 			default:
-				break;
+				continue;
 			}
 
 		default:
