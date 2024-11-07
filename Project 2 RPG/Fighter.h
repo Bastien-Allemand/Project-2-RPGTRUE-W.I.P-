@@ -7,5 +7,7 @@ public:
 	Fighter(int GHealthMax, int GDefense, int GAttack);
 
 	void levelup();
+
+	int SkilMenu() override;
 };
 

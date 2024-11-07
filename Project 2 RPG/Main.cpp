@@ -33,8 +33,8 @@ void PlayGame(tiles* allof,GameManager* GameS)
 			{
 				char MoveC = AskChar();
 				GameS->Cmoved(MoveC, &x, &y);
-				int Ex;
-				int Ey;
+				int Ex = x;
+				int Ey = y;
 				bool test = GameS->CheckEnemis(&x, &y, &Ey, &Ex);
 				Rounds++;
 				GameS->FRAME();
@@ -43,7 +43,7 @@ void PlayGame(tiles* allof,GameManager* GameS)
 				GameS->Player->ShowStat();
 				if (test)
 				{
-					int i = GameS->FightSequence(*GameS->allof[Ex].all[Ey]->Mob);
+					int i = GameS->FightSequence(GameS->allof[Ex].all[Ey]->Mob,x,y);
 					if (i == 1)
 					{
 						system("cls");
@@ -106,9 +106,9 @@ void PlayGame(tiles* allof,GameManager* GameS)
 int main()
 {
 	srand(time(0));
-	GameManager Games;
+	GameManager* Games = GameManager::GetInstance();
 	FullScreen();
-	PlayGame(Games.allof, &Games);
+	PlayGame(Games->allof, Games);
 	return 0;
 
 }

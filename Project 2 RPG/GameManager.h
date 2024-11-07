@@ -6,12 +6,14 @@
 class GameManager 
 {
 private:
-
+	static GameManager* instance;
 public:
 	Character** Mob;
 	Character* Player;
 
 	tiles* allof = new tiles[32];
+
+	static GameManager* GetInstance();
 
 	GameManager();
 
@@ -27,8 +29,15 @@ public:
 
 	bool CheckEnemis(int* x, int* y, int* Ex, int* Ey);
 
-	int FightSequence(Character Mob);
-	void ReaporSpecMove(int* x, int* y, int* Ex, int* Ey, bool RorS);
+	int GetPlayerx();
+
+	int GetPlayery();
+
+	int FightSequence(Character *Mob,int x,int y);
+
+	void FightChoice(int i);
+
+	void SpectreMove(int* Ex, int* Ey);
 };
 
 	

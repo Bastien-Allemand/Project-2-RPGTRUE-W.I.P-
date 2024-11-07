@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Mage.h"
+#include "Visual.h"
 #include "Character.h"
 using namespace std;
 
@@ -19,6 +20,11 @@ void Mage::ShowStat()
 	Character::ShowStat();
 	cout << "Mana: " << Mana;
 
+}
+
+int Mage::SkilMenu()
+{
+	return MageSkillMenu();
 }
 
 void Mage::levelup()

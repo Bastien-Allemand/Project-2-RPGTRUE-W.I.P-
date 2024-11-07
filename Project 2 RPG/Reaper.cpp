@@ -8,3 +8,18 @@ Reaper::Reaper(int HealthMax, int attack, int defense):Character(HealthMax,attac
 {
 
 }
+
+bool Reaper::takedmg(int DMG, int Defense)
+{
+	if (Character::takedmg(DMG, Defense))
+	{
+		int theal = rand() % 40;
+		if (theal == 0)
+		{
+			heal(2);
+			MoveCursor(64, 20);
+			cout << "the Reaper Healed";
+		}
+	}
+	return true;
+}

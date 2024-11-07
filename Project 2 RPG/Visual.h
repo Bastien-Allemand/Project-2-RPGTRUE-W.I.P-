@@ -16,3 +16,5 @@ void SkillMenu(int xfix, int yfix, int i);
 int StartMenu();
 void DisplayeofStart(int i);
 
+int MageSkillMenu();
+void MageSkillMenu(int xfix, int yfix, int i);

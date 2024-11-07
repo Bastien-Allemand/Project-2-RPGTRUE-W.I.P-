@@ -8,6 +8,7 @@ public:
 
 	int ManaGet();
 	void ShowStat() override;
+	int SkilMenu() override;
 	void levelup();
 };
 

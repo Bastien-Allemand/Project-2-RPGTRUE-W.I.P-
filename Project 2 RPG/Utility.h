@@ -3,7 +3,6 @@
 class GameManager;
 class EnemisClass;
 class CharacterStat;
-class tiles;
 
 char AskChar();
 
@@ -30,3 +29,5 @@ bool GraphicKey(int* i);
 int getCursorX();
 
 int getCursorY();
+
+bool Moveto(int* x, int* y, int Ex, int Ey, bool move);

@@ -13,3 +13,14 @@ void Golem::levelup()
 {
 
 }
+
+bool Golem::takedmg(int DMG, int Defense)
+{
+	int u = rand() % 50;
+	if (u == 0)
+	{
+		Character::takedmg(DMG, Defense + 999);
+	}
+	Character::takedmg(DMG, Defense);
+	return false;
+}

@@ -13,6 +13,17 @@
 #include <iostream>
 using namespace std;
 
+GameManager* GameManager::instance = nullptr;
+
+GameManager* GameManager::GetInstance()
+{
+	if (instance == nullptr)
+	{
+		instance = new GameManager();
+	}
+	return instance;
+}
+
 GameManager::GameManager()
 {
 
@@ -26,10 +37,10 @@ GameManager::GameManager()
 	}
 	bool t = true;
 	Mob = (Character**)malloc(sizeof(Character) * 4);
-	Mob[0] = new Golem(10, 10, 10);
-	Mob[1] = new Reaper(10, 10, 10);
-	Mob[2] = new Reaper(10, 10, 10);
-	Mob[3] = new Spectre(10, 10, 10);
+	Mob[0] = new Golem(10, 2, 2);
+	Mob[1] = new Reaper(10, 2, 2);
+	Mob[2] = new Reaper(10, 2, 2);
+	Mob[3] = new Spectre(10, 2, 2);
 	
 }
 
@@ -130,32 +141,19 @@ void GameManager::Cmoved(char cMove, int* x, int* y)
 	switch (cMove)
 	{
 	case('z'):
-
-		if (*x != 0)
-		{
-			*x += -1;
-		}
+		Moveto(x, y, *x - 1, *y, true);
 		allof[*x].all[*y]->Characteer = true;
 		break;
 	case('q'):
-		if (*y != 0)
-		{
-			*y += -1;
-		}
+		Moveto(x, y, *x, *y-1, true);
 		allof[*x].all[*y]->Characteer = true;
 		break;
 	case('s'):
-		if (*x != 31)
-		{
-			*x += 1;
-		}
+		Moveto(x, y, *x + 1, *y, true);
 		allof[*x].all[*y]->Characteer = true;
 		break;
 	case('d'):
-		if (*y != 31)
-		{
-			*y += 1;
-		}
+		Moveto(x, y, *x, *y+1, true);
 		allof[*x].all[*y]->Characteer = true;
 		break;
 	default:
@@ -166,131 +164,109 @@ void GameManager::Cmoved(char cMove, int* x, int* y)
 
 bool GameManager::CheckEnemis(int* x, int* y,int* Ex, int* Ey)
 {
-	bool T = false;
-	if (*x != 0)
+	for (int X = *x-1; X < *x+2; X++)
 	{
-		if (allof[*x - 1].all[*y]->enemis == true)
+		for (int Y = *y-1; Y < *y+2; Y++)
 		{
-			T = true;
-			*Ex = *x - 1;
-			*Ey = *y;
+			if (Moveto(&X, &Y, X, Y, false))
+			{
+				if (allof[X].all[Y]->enemis == true)
+				{
+					*Ex = X;
+					*Ey = Y;
+					return true;
+				}
+			}
 		}
 	}
-	if (*x != 31)
-	{
-		if (allof[*x + 1].all[*y]->enemis == true)
-		{
-			T = true;
-			*Ex = *x + 1;
-			*Ey = *y;
-		}
-	}
-	if (*y != 0)
-	{
-		if (allof[*x].all[*y - 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x;
-			*Ey = *y - 1;
-		}
-	}
-	if (*y != 31)
-	{
-		if (allof[*x].all[*y + 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x;
-			*Ey = *y + 1;
-		}
-	}
-	if (*x != 0 && *y != 0)
-	{
-		if (allof[*x - 1].all[*y - 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x - 1;
-			*Ey = *y - 1;
-		}
-	}
-	if (*x != 0 && *y != 31)
-	{
-		if (allof[*x - 1].all[*y + 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x - 1;
-			*Ey = *y + 1;
-		}
-	}
-	if (*x != 31 && *y != 31)
-	{
-		if (allof[*x + 1].all[*y + 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x + 1;
-			*Ey = *y + 1;
-		}
-	}
-	if (*x != 31 && *y != 0)
-	{
-		if (allof[*x + 1].all[*y - 1]->enemis == true)
-		{
-			T = true;
-			*Ex = *x + 1;
-			*Ey = *y - 1;
-		}
-	}
-
-	return T;
+	return false;
 }
 
-int GameManager::FightSequence(Character Mob)
+int GameManager::GetPlayerx()
 {
+	int size = 32;
+	for (int i = 0; i < size; i++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			if (allof[i].all[y]->Characteer == true)
+			{
+				return i;
+			}
+		}
+	}
+}
 
+int GameManager::GetPlayery()
+{
+	int size = 32;
+	for (int i = 0; i < size; i++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			if (allof[i].all[y]->Characteer == true)
+			{
+				return y;
+			}
+		}
+	}
+}
+
+void GameManager::FightChoice(int i) 
+{
+}
+
+int GameManager::FightSequence(Character *Mob,int x,int y)
+{
 	AllySprite(64, 0);
 	bool endof = false;
 	bool wintest = false;
+	int unused = 0;
 	while (!endof)
 	{
-
+		if (!CheckEnemis(&x, &y, &unused, &unused))
+		{
+			endof = true;
+			break;
+		}
 		MoveCursor(64, 15);
 		Player->ShowStat();
+
 		MoveCursor(94, 15);
-		Mob.ShowEstat();
+		Mob->ShowEstat();
 
 		MoveCursor(64, 11);
 		int i = FightMenu();
+
 		switch (i)
 		{
-		case(0):
-			Mob.takedmg(Player->AttackGet(),Mob.DefenseGet());
-			ClearScreen(64, 20, 90, 20);
+		case 0:
+			Mob->takedmg(Player->DmgGet(),Mob->DefenseGet());
 			MoveCursor(64, 20);
-			cout << "You HIT";
-			if (Mob.IsDead())
+			if (Mob->IsDead())
 			{
 				wintest = true;
 				endof = true;
 				break;
 			}
-			Player->takedmg(Mob.AttackGet(), Player->DefenseGet());
+			Player->takedmg(Mob->AttackGet(), Player->DefenseGet());
 			AskChar();
 			MoveCursor(64, 20);
-			cout << "The enemis attacks";
 			if (Player->IsDead())
 			{
 				endof = true;
 				break;
 			}
 			break;
-		case(1):
-			Mob.takedmg(Player->AttackGet(), Mob.DefenseGet());
-			if (Mob.IsDead())
+		case 1:
+			Mob->takedmg(Player->DmgGet(), Mob->DefenseGet());
+			if (Mob->IsDead())
 			{
 				wintest = true;
 				endof = true;
 				break;
 			}
-			Player->takedmg(Mob.AttackGet(), Player->DefenseGet());
+			Player->takedmg(Mob->AttackGet(), Player->DefenseGet());
 			if (Player->IsDead())
 			{
 				endof = true;
@@ -298,43 +274,46 @@ int GameManager::FightSequence(Character Mob)
 
 			}
 			break;
-		case(2):
+		case 2:
+		{
+			MoveCursor(64, 11);
 			int skill = SkillMenu();
 			switch (skill)
 			{
-			case(0):
-				Mob.takedmg(Player->AttackGet()+5, Mob.DefenseGet());
+			case 0:
+				Mob->takedmg(Player->DmgGet() + 5, Mob->DefenseGet());
 				cout << "You use Slash";
-				if (Mob.IsDead())
+				if (Mob->IsDead())
 				{
 					wintest = true;
 					endof = true;
 					break;
 				}
-				Player->takedmg(Mob.AttackGet(), Player->DefenseGet());
+				Player->takedmg(Mob->AttackGet(), Player->DefenseGet());
 				if (Player->IsDead())
 				{
 					endof = true;
 					break;
 				}
 				break;
-			case(1):
-				Player->takedmg(Mob.AttackGet(), Player->DefenseGet()+5);
+			case 1:
+				Player->takedmg(Mob->AttackGet(), Player->DefenseGet() + 5);
 				if (Player->IsDead())
 				{
 					endof = true;
 					break;
 				}
 				break;
-			case(2):
+			case 2:
 				break;
 
 			default:
-				continue;
+				break;
 			}
+			break;
+		}
 
 		default:
-			exit(1);
 			break;
 		}
 	}
@@ -343,18 +322,55 @@ int GameManager::FightSequence(Character Mob)
 		Player->levelup();
 		return 0;
 	}
-	else
+	else if (Player->IsDead())
 	{
 		return 1;
+	}
+	else
+	{
+		return 0;
 	}
 
 	
 }
 
-void GameManager::ReaporSpecMove(int* x,int* y,int* Ex,int* Ey,bool RorS)
+void GameManager::SpectreMove(int *Ex, int *Ey)
 {
-	if (RorS)
+	
+	int x = GetPlayerx();
+	int y = GetPlayery();
+	int beforex = *Ex;
+	int beforey = *Ey;
+	if (x > *Ex)
 	{
-
+		if (Moveto(Ex, Ey, *Ex - 1, *Ey, false))
+		{
+			*Ex -= 1;
+		}
 	}
+	else
+	{
+		if (Moveto(Ex, Ey, *Ex + 1, *Ey, false))
+		{
+			*Ex += 1;
+		}
+	}
+	if (y > *Ey)
+	{
+		if (Moveto(Ex, Ey, *Ex, *Ey-1, false))
+		{
+			*Ey -= 1;
+		}
+	}
+	else
+	{
+		if (Moveto(Ex, Ey, *Ex, *Ey+1, false))
+		{
+			*Ey += 1;
+		}
+	}
+	allof[*Ex].all[*Ey]->enemis = true;
+	allof[beforex].all[beforey]->enemis = false;
+	allof[*Ex].all[*Ey]->Mob = allof[beforex].all[beforey]->Mob;
+	allof[beforex].all[beforey]->Mob = NULL;
 }

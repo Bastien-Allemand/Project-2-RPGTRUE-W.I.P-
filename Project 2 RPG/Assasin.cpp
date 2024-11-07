@@ -35,3 +35,15 @@ int Assasin::ManaGet()
 {
 	return Mana;
 }
+
+int Assasin::DmgGet()
+{
+	if (rand()%critRate == 0)
+	{
+		return AttackGet() * 2;
+	}
+	else
+	{
+		return AttackGet();
+	}
+}

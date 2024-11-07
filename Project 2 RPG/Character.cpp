@@ -32,9 +32,8 @@ void Character::heal(int healing)
 	}
 }
 
-void Character::takedmg(int DMG,int Defense)
+bool Character::takedmg(int DMG,int Defense)
 {
-	int Chance = rand() % CritGet();
 	int miss = rand() % 30;
 	if (DMG - Defense <= 0)
 	{
@@ -42,18 +41,25 @@ void Character::takedmg(int DMG,int Defense)
 	}
 	else
 	{
-		if (Chance == 1)
+		if (DMG == Attack*2)
 		{
-			Health -= DMG*2 - Defense;
+			Health -= DMG - Defense;
+			MoveCursor(64, 20);
 			cout << "CRITICAL HIT ";
+			return true;
 		}
 		else if(miss == 0)
 		{
+			MoveCursor(64, 20);
 			cout << "you Missed";
+			return false;
 		}
 		else
 		{
+			MoveCursor(64, 20);
+			cout << "your Attack hit for " << DMG;
 			Health -= DMG - Defense;
+			return true;
 		}
 
 	}
@@ -116,6 +122,16 @@ void Character::ShowEstat()
 	cout << "Attack: " << AttackGet();
 	MoveCursor(x, y + 2);
 	cout << "Defense: " << DefenseGet();
+}
+
+int Character::SkilMenu()
+{
+	return 0;
+}
+
+int Character::DmgGet()
+{
+	return Attack;
 }
 
 int Character::AttackGet()

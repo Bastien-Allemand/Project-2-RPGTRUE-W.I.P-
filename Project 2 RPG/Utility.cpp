@@ -150,3 +150,20 @@ int getCursorY()
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
 	return csbi.dwCursorPosition.Y;
 }
+
+bool Moveto(int* x, int* y, int Ex, int Ey, bool move)
+{
+	if (Ex >= 0 && Ex <= 31)
+	{
+		if (Ey >= 0 && Ey <= 31)
+		{
+			if (move)
+			{
+				*x = Ex;
+				*y = Ey;
+			}
+			return true;
+		}
+	}
+	return false;
+}

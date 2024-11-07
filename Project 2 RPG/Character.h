@@ -18,7 +18,9 @@ public:
 
 	void heal(int healing);
 
-	void takedmg(int DMG,int Defense);
+	virtual bool takedmg(int DMG,int Defense);
+
+	int DmgGet();
 
 	int AttackGet();
 
@@ -35,6 +37,8 @@ public:
 	virtual void ShowStat();
 
 	void ShowEstat();
+
+	virtual int SkilMenu();
 
 };
 

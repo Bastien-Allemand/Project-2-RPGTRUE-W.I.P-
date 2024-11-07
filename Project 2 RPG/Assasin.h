@@ -9,6 +9,7 @@ public:
 	int CritGet() override;
 	void ShowStat();
 	int ManaGet();
+	int DmgGet();
 	void levelup();
 
 };
