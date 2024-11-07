@@ -129,10 +129,12 @@
   <ItemGroup>
     <ClCompile Include="Assasin.cpp" />
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="EnemisClass.cpp" />
     <ClCompile Include="Fighter.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Golem.cpp" />
     <ClCompile Include="Mage.cpp" />
+    <ClCompile Include="Reaper.cpp" />
+    <ClCompile Include="Spectre.cpp" />
     <ClCompile Include="Visual.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -142,10 +144,12 @@
     <ClInclude Include="Assasin.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Color.h" />
-    <ClInclude Include="EnemisClass.h" />
     <ClInclude Include="Fighter.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Golem.h" />
     <ClInclude Include="Mage.h" />
+    <ClInclude Include="Reaper.h" />
+    <ClInclude Include="Spectre.h" />
     <ClInclude Include="Visual.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tiles.h" />

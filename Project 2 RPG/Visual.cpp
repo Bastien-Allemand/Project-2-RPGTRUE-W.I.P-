@@ -207,8 +207,63 @@ void FightDisplay(int xfix,int yfix ,int i)
 	cout << "(Q,D,Space to Validate)"; MoveCursor(xfix, yfix);
 	cout << "Menu:"; MoveCursor(xfix, yfix+1);
 	cout << first << "+---------+" << second << "---------+" << third << "--------+ " << DEFAULT; MoveCursor(xfix, yfix+2);
-	cout << first << "|  Fight  |" << second << "Item(WIP)|" << third << "Nothing |" << DEFAULT; MoveCursor(xfix, yfix+3);
+	cout << first << "|  Fight  |" << second << "Item(WIP)|" << third << " Skill  |" << DEFAULT; MoveCursor(xfix, yfix+3);
 	cout << first << "+---------+" << second << "---------+" << third << "--------+" << DEFAULT; MoveCursor(xfix, yfix+4);
+
+}
+
+int SkillMenu()
+{
+	int i = 0;
+	int xfix = getCursorX();
+	int yfix = getCursorY();
+	SkillMenu(xfix, yfix, i);
+	while (true)
+	{
+
+
+		if (GraphicKey(&i))
+		{
+			return i;
+		}
+		else
+		{
+			SkillMenu(xfix, yfix, i);
+		}
+	}
+}
+void SkillMenu(int xfix, int yfix, int i)
+{
+	const char* first = DEFAULT;
+	const char* second = DEFAULT;
+	const char* third = DEFAULT;
+	if (i == 0)
+	{
+		first = GREEN;
+		second = DEFAULT;
+		third = DEFAULT;
+	}
+	if (i == 1)
+	{
+		first = DEFAULT;
+		second = GREEN;
+		third = DEFAULT;
+	}
+	if (i == 2)
+	{
+		first = DEFAULT;
+		second = DEFAULT;
+		third = GREEN;
+	}
+	HideCursor();
+
+	MoveCursor(xfix + 6, yfix);
+
+	cout << "(Q,D,Space to Validate)"; MoveCursor(xfix, yfix);
+	cout << "Menu:"; MoveCursor(xfix, yfix + 1);
+	cout << first << "+---------+" << second << "---------+" << third << "--------+ " << DEFAULT; MoveCursor(xfix, yfix + 2);
+	cout << first << "|  Slash  |" << second << "  Shield |" << third << "  Back  |" << DEFAULT; MoveCursor(xfix, yfix + 3);
+	cout << first << "+---------+" << second << "---------+" << third << "--------+" << DEFAULT; MoveCursor(xfix, yfix + 4);
 
 }
 

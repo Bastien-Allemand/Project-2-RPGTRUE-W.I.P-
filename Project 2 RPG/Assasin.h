@@ -7,6 +7,7 @@ class Assasin : public Character
 public:
 	Assasin(int GMana, int GHealthMax, int GDefense, int GAttack);
 	int CritGet();
+	void ShowStat();
 	int ManaGet();
 	void levelup();
 

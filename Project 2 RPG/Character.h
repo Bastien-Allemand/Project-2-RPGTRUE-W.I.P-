@@ -30,7 +30,9 @@ public:
 
 	void levelup();
 
-	void ShowStat();
+	virtual void ShowStat();
+
+	void ShowEstat();
 
 };
 

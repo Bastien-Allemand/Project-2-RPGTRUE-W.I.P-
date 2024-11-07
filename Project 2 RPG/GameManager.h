@@ -1,5 +1,4 @@
 #pragma once
-#include "EnemisClass.h"
 #include "Visual.h"
 #include "Utility.h"
 #include "Character.h"
@@ -9,8 +8,9 @@ class GameManager
 private:
 
 public:
-	EnemisClass* Mob;
+	Character** Mob;
 	Character* Player;
+
 	tiles* allof = new tiles[32];
 
 	GameManager();
@@ -27,6 +27,8 @@ public:
 
 	bool CheckEnemis(int* x, int* y, int* Ex, int* Ey);
 
-	int FightSequence(EnemisClass Mob);
+	int FightSequence(Character Mob);
+	void ReaporSpecMove(int* x, int* y, int* Ex, int* Ey, bool RorS);
 };
 
+	

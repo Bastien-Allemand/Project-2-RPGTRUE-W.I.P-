@@ -3,11 +3,13 @@
 #include "Character.h"
 #include "Assasin.h"
 #include "Fighter.h"
+#include "Golem.h"
+#include "Spectre.h"
+#include "Reaper.h"
 #include "Mage.h"
 #include "Color.h"
 #include "Sprite.h"
 #include "Visual.h"
-#include "EnemisClass.h"
 #include <iostream>
 using namespace std;
 
@@ -23,13 +25,12 @@ GameManager::GameManager()
 		}
 	}
 	bool t = true;
-
-	Mob = (EnemisClass*)malloc(sizeof(EnemisClass) * 4);
-
-	Mob[0] = EnemisClass(1, 10, 1, 1);
-	Mob[1] = EnemisClass(1, 10, 1, 2);
-	Mob[2] = EnemisClass(1, 10, 1, 3);
-	Mob[3] = EnemisClass(0, 10, 1, 4);
+	Mob = (Character**)malloc(sizeof(Character) * 4);
+	Mob[0] = new Golem(10, 10, 10);
+	Mob[1] = new Reaper(10, 10, 10);
+	Mob[2] = new Reaper(10, 10, 10);
+	Mob[3] = new Spectre(10, 10, 10);
+	
 }
 
 void GameManager::CharacterCreation(int Class)
@@ -102,22 +103,22 @@ void  GameManager::makingofmap()
 			if (x == 10 && y == 10)
 			{
 				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = &Mob[0];
+				allof[x].all[y]->Mob = Mob[0];
 			}
 			if (x == 20 && y == 10)
 			{
 				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = &Mob[1];
+				allof[x].all[y]->Mob = Mob[1];
 			}
 			if (x == 10 && y == 20)
 			{
 				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = &Mob[2];
+				allof[x].all[y]->Mob = Mob[2];
 			}
 			if (x == 20 && y == 20)
 			{
 				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = &Mob[3];
+				allof[x].all[y]->Mob = Mob[3];
 			}
 		}
 	}
@@ -242,7 +243,7 @@ bool GameManager::CheckEnemis(int* x, int* y,int* Ex, int* Ey)
 	return T;
 }
 
-int GameManager::FightSequence(EnemisClass Mob)
+int GameManager::FightSequence(Character Mob)
 {
 	AllySprite(64, 0);
 	bool endof = false;
@@ -250,14 +251,10 @@ int GameManager::FightSequence(EnemisClass Mob)
 	while (!endof)
 	{
 
-		MoveCursor(64, 17);
+		MoveCursor(64, 15);
 		Player->ShowStat();
-
-		MoveCursor(94, 18);
-		cout << "Attack: " << Mob.AttackGet();
-		MoveCursor(94, 19);
-		cout << "Defense: " << Mob.DefenseGet();
-
+		MoveCursor(94, 15);
+		Mob.ShowEstat();
 
 		MoveCursor(64, 11);
 		int i = FightMenu();
@@ -265,7 +262,9 @@ int GameManager::FightSequence(EnemisClass Mob)
 		{
 		case(0):
 			Mob.takedmg(Player->AttackGet(),Mob.DefenseGet());
-			
+			ClearScreen(64, 20, 90, 20);
+			MoveCursor(64, 20);
+			cout << "You HIT";
 			if (Mob.IsDead())
 			{
 				wintest = true;
@@ -273,7 +272,9 @@ int GameManager::FightSequence(EnemisClass Mob)
 				break;
 			}
 			Player->takedmg(Mob.AttackGet(), Player->DefenseGet());
-			
+			AskChar();
+			MoveCursor(64, 20);
+			cout << "The enemis attacks";
 			if (Player->IsDead())
 			{
 				endof = true;
@@ -296,20 +297,22 @@ int GameManager::FightSequence(EnemisClass Mob)
 			}
 			break;
 		case(2):
-			Mob.takedmg(Player->AttackGet(), Mob.DefenseGet());
-			if (Mob.IsDead())
+			int skill = SkillMenu();
+			switch (skill)
 			{
-				wintest = true;
-				endof = true;
+			case(0):
+				//slash
+				break;
+			case(1):
+				//shield
+				break;
+			case(2):
+				break;
+
+			default:
 				break;
 			}
-			Player->takedmg(Mob.AttackGet(), Player->DefenseGet());
-			if (Player->IsDead())
-			{
-				endof = true;
-				break;
-			}
-			break;
+
 		default:
 			exit(1);
 			break;
@@ -326,4 +329,12 @@ int GameManager::FightSequence(EnemisClass Mob)
 	}
 
 	
+}
+
+void GameManager::ReaporSpecMove(int* x,int* y,int* Ex,int* Ey,bool RorS)
+{
+	if (RorS)
+	{
+
+	}
 }

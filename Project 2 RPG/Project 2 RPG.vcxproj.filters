@@ -42,9 +42,6 @@
     <ClCompile Include="Character.cpp">
       <Filter>Fichiers sources\Class%27s.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="EnemisClass.cpp">
-      <Filter>Fichiers sources\Class%27s.cpp</Filter>
-    </ClCompile>
     <ClCompile Include="Fighter.cpp">
       <Filter>Fichiers sources\Class%27s.cpp</Filter>
     </ClCompile>
@@ -56,6 +53,15 @@
     </ClCompile>
     <ClCompile Include="Visual.cpp">
       <Filter>Fichiers sources\Graphic.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Golem.cpp">
+      <Filter>Fichiers sources\Class%27s.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Spectre.cpp">
+      <Filter>Fichiers sources\Class%27s.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Reaper.cpp">
+      <Filter>Fichiers sources\Class%27s.cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,14 +89,20 @@
     <ClInclude Include="Visual.h">
       <Filter>Fichiers d%27en-tête\Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="EnemisClass.h">
-      <Filter>Fichiers d%27en-tête\Class%27s</Filter>
-    </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Fichiers d%27en-tête\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Fichiers d%27en-tête\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Golem.h">
+      <Filter>Fichiers d%27en-tête\Class%27s</Filter>
+    </ClInclude>
+    <ClInclude Include="Reaper.h">
+      <Filter>Fichiers d%27en-tête\Class%27s</Filter>
+    </ClInclude>
+    <ClInclude Include="Spectre.h">
+      <Filter>Fichiers d%27en-tête\Class%27s</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@ using namespace std;
 
 void PlayGame(tiles* allof,GameManager* GameS)
 {
+	int K = 4;
 	GameS->makingofmap();
 	while (true)
 	{
@@ -22,8 +23,9 @@ void PlayGame(tiles* allof,GameManager* GameS)
 		{
 			
 			GameS->CharacterCreation(CharacreationMenu());
+
 			GameS->FRAME();
-			MoveCursor(64, 17);
+			MoveCursor(64, 15);
 			GameS->Player->ShowStat();
 			int x = 31, y = 16;
 			while (true)
@@ -34,12 +36,11 @@ void PlayGame(tiles* allof,GameManager* GameS)
 				int Ey;
 				bool test = GameS->CheckEnemis(&x, &y, &Ey, &Ex);
 				GameS->FRAME();
-				MoveCursor(64, 17);
+				MoveCursor(64, 15);
 				GameS->Player->ShowStat();
 				if (test)
 				{
-					EnemisClass* enemy = GameS->allof[Ex].all[Ey]->Mob;
-					int i = GameS->FightSequence(*enemy);
+					int i = GameS->FightSequence(*GameS->allof[Ex].all[Ey]->Mob);
 					if (i == 1)
 					{
 						system("cls");
@@ -51,10 +52,18 @@ void PlayGame(tiles* allof,GameManager* GameS)
 					{
 						
 						GameS->allof[Ey].all[Ex]->enemis = false;
+						K--;
+ 						if (K == 0)
+						{
+							system("cls");
+							cout << "WIN";
+							AskChar();
+							exit(0);
+						}
 					}
-					ClearScreen(64, 0, 75, 20);
+					ClearScreen(64, 0, 75, 21);
 					GameS->FRAME();
-					MoveCursor(64, 17);
+					MoveCursor(64, 15);
 					GameS->Player->ShowStat();
 				}
 				

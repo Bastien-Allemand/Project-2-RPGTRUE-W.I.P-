@@ -1,5 +1,9 @@
+#pragma once
 #include "Assasin.h"
 #include "Character.h"
+#include "Utility.h"
+#include <iostream>
+using namespace std;
 
 Assasin::Assasin(int GMana, int GHealthMax, int GDefense, int GAttack) : Character(GHealthMax, GDefense, GAttack)
 {
@@ -16,6 +20,15 @@ void Assasin::levelup()
 int Assasin::CritGet()
 {
 	return critRate;
+}
+
+void Assasin::ShowStat()
+{
+	Character::ShowStat();
+	cout << "Mana: " << Mana;
+	int x = getCursorX(), y = getCursorY();
+	MoveCursor(x, y+1);
+	cout << "Crit Rate: " << critRate;
 }
 
 int Assasin::ManaGet()

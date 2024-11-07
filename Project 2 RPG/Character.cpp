@@ -76,7 +76,31 @@ void Character::ShowStat()
 	cout << "Attack: " << Attack;
 	MoveCursor(x, y+2);
 	cout << "Defense: " << Defense;
+	MoveCursor(x, y+3);
 
+}
+
+void Character::ShowEstat()
+{
+	int x = getCursorX(), y = getCursorY();
+
+	MoveCursor(x, y);
+	cout << "Health: " << HealthGet() << " / " << MaxHealthGet();
+	int heart = ((HealthGet() * 100) / MaxHealthGet()) / 10;
+	cout << "[";
+	for (int i = 0; i < heart; i++)
+	{
+		cout << SBRED << " " << BDEFAULT;
+	}
+	for (int i = heart; i < 10; i++)
+	{
+		cout << BRED << " " << BDEFAULT;
+	}
+	cout << "]";
+	MoveCursor(x, y + 1);
+	cout << "Attack: " << AttackGet();
+	MoveCursor(x, y + 2);
+	cout << "Defense: " << DefenseGet();
 }
 
 int Character::AttackGet()
