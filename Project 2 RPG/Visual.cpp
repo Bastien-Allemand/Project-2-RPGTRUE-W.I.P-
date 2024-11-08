@@ -317,7 +317,7 @@ void MageSkillMenu(int xfix, int yfix, int i)
 	cout << "(Q,D,Space to Validate)"; MoveCursor(xfix, yfix);
 	cout << "Menu:"; MoveCursor(xfix, yfix + 1);
 	cout << first << "+---------+" << second << "---------+" << third << "--------+ " << DEFAULT; MoveCursor(xfix, yfix + 2);
-	cout << first << "|Fireball |" << second << "   Heal  |" << third << "  Back  |" << DEFAULT; MoveCursor(xfix, yfix + 3);
+	cout << first << "|Fireball |" << second << "  Brace  |" << third << "  Back  |" << DEFAULT; MoveCursor(xfix, yfix + 3);
 	cout << first << "+---------+" << second << "---------+" << third << "--------+" << DEFAULT; MoveCursor(xfix, yfix + 4);
 
 }

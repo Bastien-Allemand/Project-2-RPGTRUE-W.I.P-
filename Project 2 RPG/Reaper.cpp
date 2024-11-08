@@ -23,3 +23,8 @@ bool Reaper::takedmg(int DMG, int Defense)
 	}
 	return true;
 }
+
+void Reaper::ColorE()
+{
+	cout << BRED;
+}

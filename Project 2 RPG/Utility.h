@@ -30,4 +30,4 @@ int getCursorX();
 
 int getCursorY();
 
-bool Moveto(int* x, int* y, int Ex, int Ey, bool move);
+bool CheckMove(int* x, int* y, int Ex, int Ey, bool move);

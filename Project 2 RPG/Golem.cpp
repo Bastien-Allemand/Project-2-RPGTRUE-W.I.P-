@@ -24,3 +24,8 @@ bool Golem::takedmg(int DMG, int Defense)
 	Character::takedmg(DMG, Defense);
 	return false;
 }
+
+void Golem::ColorE()
+{
+	cout << BGREEN;
+}

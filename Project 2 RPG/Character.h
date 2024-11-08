@@ -9,7 +9,6 @@ public:
 	int Health;
 	int Defense;
 	int Attack;
-	bool Specter = false;
 
 
 	int x;
@@ -42,6 +41,8 @@ public:
 	void ShowEstat();
 
 	virtual int SkilMenu();
+
+	virtual void ColorE();
 
 };
 

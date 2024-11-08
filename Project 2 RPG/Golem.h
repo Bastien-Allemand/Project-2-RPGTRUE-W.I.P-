@@ -7,6 +7,8 @@ public:
 
 	void levelup();
 
-	bool takedmg(int DMG, int Defense) override;
+	bool takedmg(int DMG, int Defense)override;
+
+	void ColorE() override;
 };
 

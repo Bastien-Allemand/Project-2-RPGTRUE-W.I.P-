@@ -46,7 +46,7 @@ bool Character::takedmg(int DMG,int Defense)
 			Health -= DMG - Defense;
 			MoveCursor(64, 20);
 			cout << "CRITICAL HIT ";
-			return true;
+			
 		}
 		else if(miss == 0)
 		{
@@ -59,9 +59,8 @@ bool Character::takedmg(int DMG,int Defense)
 			MoveCursor(64, 20);
 			cout << "your Attack hit for " << DMG;
 			Health -= DMG - Defense;
-			return true;
 		}
-
+		return true;
 	}
 }
 
@@ -127,6 +126,10 @@ void Character::ShowEstat()
 int Character::SkilMenu()
 {
 	return 0;
+}
+
+void Character::ColorE()
+{
 }
 
 int Character::DmgGet()

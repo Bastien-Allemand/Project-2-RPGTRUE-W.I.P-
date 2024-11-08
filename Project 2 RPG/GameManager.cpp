@@ -36,11 +36,11 @@ GameManager::GameManager()
 		}
 	}
 	bool t = true;
-	Mob = (Character**)malloc(sizeof(Character) * 4);
-	Mob[0] = new Golem(10, 2, 2);
-	Mob[1] = new Reaper(10, 2, 2);
-	Mob[2] = new Reaper(10, 2, 2);
-	Mob[3] = new Spectre(10, 2, 2);
+	reaper = (Reaper**)malloc(sizeof(Reaper) * 2);
+	golem = new Golem(10, 5, 3);
+	spectre = new Spectre(10, 3, 1);
+	reaper[0] = new Reaper(10, 8, 2);
+	reaper[1] = new Reaper(10, 8, 2);
 	
 }
 
@@ -71,7 +71,8 @@ void GameManager::Colorising(int y, int x)
 {
 	if (allof[x].all[y]->enemis == true)
 	{
-		cout << BRED << "  " << BDEFAULT;
+		allof[x].all[y]->Mob->ColorE();
+		cout << "  " << BDEFAULT;
 	}
 	else if (allof[x].all[y]->Characteer == true)
 	{
@@ -114,22 +115,22 @@ void  GameManager::makingofmap()
 			if (x == 10 && y == 10)
 			{
 				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = Mob[0];
+				allof[x].all[y]->Mob = golem;
 			}
 			if (x == 20 && y == 10)
 			{
 				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = Mob[1];
+				allof[x].all[y]->Mob = spectre;
 			}
 			if (x == 10 && y == 20)
 			{
 				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = Mob[2];
+				allof[x].all[y]->Mob = reaper[0];
 			}
 			if (x == 20 && y == 20)
 			{
 				allof[x].all[y]->enemis = true;
-				allof[x].all[y]->Mob = Mob[3];
+				allof[x].all[y]->Mob = reaper[1];
 			}
 		}
 	}
@@ -141,19 +142,19 @@ void GameManager::Cmoved(char cMove, int* x, int* y)
 	switch (cMove)
 	{
 	case('z'):
-		Moveto(x, y, *x - 1, *y, true);
+		CheckMove(x, y, *x - 1, *y, true);
 		allof[*x].all[*y]->Characteer = true;
 		break;
 	case('q'):
-		Moveto(x, y, *x, *y-1, true);
+		CheckMove(x, y, *x, *y-1, true);
 		allof[*x].all[*y]->Characteer = true;
 		break;
 	case('s'):
-		Moveto(x, y, *x + 1, *y, true);
+		CheckMove(x, y, *x + 1, *y, true);
 		allof[*x].all[*y]->Characteer = true;
 		break;
 	case('d'):
-		Moveto(x, y, *x, *y+1, true);
+		CheckMove(x, y, *x, *y+1, true);
 		allof[*x].all[*y]->Characteer = true;
 		break;
 	default:
@@ -168,7 +169,7 @@ bool GameManager::CheckEnemis(int* x, int* y,int* Ex, int* Ey)
 	{
 		for (int Y = *y-1; Y < *y+2; Y++)
 		{
-			if (Moveto(&X, &Y, X, Y, false))
+			if (CheckMove(&X, &Y, X, Y, false))
 			{
 				if (allof[X].all[Y]->enemis == true)
 				{
@@ -218,12 +219,27 @@ void GameManager::FightChoice(int i)
 
 int GameManager::FightSequence(Character *Mob,int x,int y)
 {
+	int specterX, specterY;
+	GetSpecter(&specterX, &specterY);
+  	if (allof[specterX].all[specterY]->Mob->HealthGet() <= 0)
+	{
+		allof[specterX].all[specterY]->enemis = false;
+	}
 	AllySprite(64, 0);
+
 	bool endof = false;
 	bool wintest = false;
 	int unused = 0;
+	bool isSpectre = false;
+	if (Mob == spectre)
+	{
+		isSpectre = true;
+	}
+
 	while (!endof)
 	{
+
+
 		if (!CheckEnemis(&x, &y, &unused, &unused))
 		{
 			endof = true;
@@ -241,21 +257,56 @@ int GameManager::FightSequence(Character *Mob,int x,int y)
 		switch (i)
 		{
 		case 0:
-			Mob->takedmg(Player->DmgGet(),Mob->DefenseGet());
-			MoveCursor(64, 20);
-			if (allof[Mob->x].all[Mob->y]->Mob->IsDead())
+			if (isSpectre)
 			{
-				wintest = true;
-				endof = true;
-				break;
+				if (Mob != spectre)
+				{
+
+				}
+				int specterX, specterY;
+				GetSpecter(&specterX, &specterY);
+				Mob = allof[specterX].all[specterY]->Mob;
 			}
-			Player->takedmg(Mob->DmgGet(), Player->DefenseGet());
-			AskChar();
+				Mob->takedmg(Player->DmgGet(), Mob->DefenseGet());
+				if (isSpectre)
+				{
+					if (Mob != spectre)
+					{
+
+					}
+					int specterX, specterY;
+					GetSpecter(&specterX, &specterY);
+					Mob = allof[specterX].all[specterY]->Mob;
+				}
+				MoveCursor(64, 20);
+   				if (Mob->IsDead())
+				{
+					wintest = true;
+					endof = true;
+					break;
+				}
+				Player->takedmg(Mob->DmgGet(), Player->DefenseGet());
+				if (isSpectre)
+				{
+					if (Mob != spectre)
+					{
+
+					}
+					int specterX, specterY;
+					GetSpecter(&specterX, &specterY);
+					Mob = allof[specterX].all[specterY]->Mob;
+				}
+				AskChar();
+	
 			MoveCursor(64, 20);
 			if (Player->IsDead())
 			{
 				endof = true;
 				break;
+			}
+			if (isSpectre)
+			{
+				endof = true;
 			}
 			break;
 		case 1:
@@ -305,13 +356,21 @@ int GameManager::FightSequence(Character *Mob,int x,int y)
 		default:
 			break;
 		}
+		
+	}
+	FRAME();
+	int xe = GetPlayerx();
+	int ye = GetPlayery();
+	if (isSpectre)
+	{
+		return 0;
 	}
 	if (wintest)
 	{
 		Player->levelup();
 		return 0;
 	}
-	else if (Player->IsDead())
+	else if (allof[x].all[y]->Player->IsDead())
 	{
 		return 1;
 	}
@@ -325,12 +384,12 @@ int GameManager::FightSequence(Character *Mob,int x,int y)
 
 void GameManager::GetSpecter(int* x, int* Y)
 {
-	int size = 32;
+	int size = 31;
 	for (int i = 0; i < size; i++)
 	{
 		for (int y = 0; y < size; y++)
 		{
-			if (allof[i].all[y]->Mob->Specter == true)
+			if (allof[i].all[y]->Mob == spectre)
 			{
 				*x = i;
 				*Y = y;
@@ -342,66 +401,73 @@ void GameManager::GetSpecter(int* x, int* Y)
 
 void GameManager::SpectreMove()
 {
-	
+
 	int x = GetPlayerx();
 	int y = GetPlayery();
-	int Sx,Sy;
+	int Sx, Sy;
 	GetSpecter(&Sx, &Sy);
-	int beforex = Sx;
-	int beforey = Sx;
+	int Newx = Sx, Newy = Sy;
 	if (x > Sx)
 	{
-		if (Moveto(&Sx,&Sy, Sx - 1, Sy, false))
+		if (CheckMove(&x, &y, Sx - 1, Sy, false))
 		{
-			Sx -= 1;
+			int Newx = Sx - 1;
 		}
 	}
-	else
+	if (x < Sx)
 	{
-		if (Moveto(&Sx, &Sy, Sx + 1, Sy, false))
+		if (CheckMove(&x, &y, Sx + 1, Sy, false))
 		{
-			Sx += 1;
+			int Newx = Sx + 1;
 		}
 	}
 	if (y > Sy)
 	{
-		if (Moveto(&Sx, &Sy, Sx, Sy-1, false))
+		if (CheckMove(&x, &y, Sx, Sy - 1, false))
 		{
-			Sy -= 1;
+			Newy = Sy - 1;
 		}
 	}
-	else
+	if (y < Sy)
 	{
-		if (Moveto(&Sx,&Sy, Sx, Sy+1, false))
+		if (CheckMove(&x, &y, Sx, Sy + 1, false))
 		{
-			Sy += 1;
+			Newy = Sy + 1;
 		}
 	}
-	allof[Sx].all[Sy]->enemis = true;
-	allof[beforex].all[beforey]->enemis = false;
-	allof[Sx].all[Sy]->Mob = allof[beforex].all[beforey]->Mob;
-	cout << allof[Sx].all[Sy]->Mob->AttackGet();
-	allof[beforex].all[beforey]->Mob = NULL;
+	allof[Sx].all[Sy]->enemis = false;
+	allof[Newx].all[Newy]->enemis = true;
+	if (allof[Sx].all[Sy]->Mob->IsDead())
+	{
+		allof[Newx].all[Newy]->enemis = false;
+	}
+	allof[Newx].all[Newy]->Mob = allof[Sx].all[Sy]->Mob;
+	FRAME();
 }
 
 bool GameManager::Checkforwin()
 {
-	bool test = true;
+	bool test = false;
 	int size = 32;
-	for (int i = 0; i < size; i++)
+	if (allof[10].all[10]->Mob->IsDead())
 	{
-		for (int y = 0; y < size; y++)
-		{
-			if (allof[y].all[i]->enemis == true)
-			{
-				test = true;
-				if (allof[i].all[y]->Mob->IsDead())
-				{
-					allof[y].all[i]->enemis = false;
-					
-				}
-			}
-		}
+		allof[10].all[10]->enemis = false;
+		test = true;
+	}
+	if (allof[20].all[20]->Mob->IsDead())
+	{
+		allof[20].all[20]->enemis = false;
+	}
+	if (allof[10].all[20]->Mob->IsDead())
+	{
+		allof[10].all[20]->enemis = false;
+	}
+	int specterX, specterY;
+	GetSpecter(&specterX, &specterY);
+	if (allof[specterX].all[specterY]->Mob->IsDead())
+	{
+		allof[specterX].all[specterY]->enemis = false;
+		test = true;
 	}
 	for (int i = 0; i < size; i++)
 	{
@@ -415,3 +481,4 @@ bool GameManager::Checkforwin()
 	}
 	return test;
 }
+

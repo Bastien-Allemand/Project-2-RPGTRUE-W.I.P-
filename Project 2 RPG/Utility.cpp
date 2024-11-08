@@ -37,6 +37,7 @@ bool GraphicKey(int* i)
 		*i = *i % 3;
 		return false;
 	default:
+		GraphicKey(i);
 		break;
 	}
 }
@@ -151,7 +152,7 @@ int getCursorY()
 	return csbi.dwCursorPosition.Y;
 }
 
-bool Moveto(int* x, int* y, int Ex, int Ey, bool move)
+bool CheckMove(int* x, int* y, int Ex, int Ey, bool move)
 {
 	if (Ex >= 0 && Ex <= 31)
 	{

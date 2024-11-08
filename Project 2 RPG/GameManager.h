@@ -1,6 +1,9 @@
 #pragma once
 #include "Visual.h"
 #include "Utility.h"
+#include "Golem.h"
+#include "Spectre.h"
+#include "Reaper.h"
 #include "Character.h"
 #include "Tiles.h"
 class GameManager 
@@ -8,7 +11,9 @@ class GameManager
 private:
 	static GameManager* instance;
 public:
-	Character** Mob;
+	Golem* golem;
+	Spectre* spectre;
+	Reaper** reaper;
 	Character* Player;
 
 	tiles* allof = new tiles[32];
@@ -40,6 +45,7 @@ public:
 	void FightChoice(int i);
 
 	void SpectreMove();
+
 	bool Checkforwin();
 };
 

@@ -47,7 +47,8 @@ void PlayGame(tiles* allof,GameManager* GameS)
 				if (test)
 				{
 
-					int i = GameS->FightSequence(GameS->allof[Ex].all[Ey]->Mob,x,y);
+					int i = GameS->FightSequence(GameS->allof[Ey].all[Ex]->Mob,x,y);
+
 					if (i == 1)
 					{
 						system("cls");
